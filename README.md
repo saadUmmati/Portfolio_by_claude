@@ -139,3 +139,109 @@ For questions or help customizing this repo, contact Saad via the details in `sr
 
 ---
 
+## Profile — details extracted from the repository (all available personal data)
+
+Below I've gathered every personal detail present in the repository files (site data, experience, meetings, and related data files). Review for accuracy and remove anything you do not want published.
+
+### Canonical identity
+- Name: Muhammad Saad Ahmed
+- Short name / handle: saad
+- Public site URLs found in repo: https://saadai.vercel.app, https://saadahmed.dev
+- Title / primary role: AI Engineer
+- Rotating roles: AI Engineer; On-Device AI Specialist; Automation Engineer
+- Tagline: I build on-device AI, LLM-powered agents, and automation systems — from Android apps with real-time ML clustering to AI-powered products shipped end to end.
+- Availability: Available for New Opportunities
+
+### Contact & socials
+- Email: msaadisiddiqui@gmail.com
+- WhatsApp: +92 312 5696938 (stored as 923125696938 in repo)
+- Location: Wah Cantt, Pakistan
+- LinkedIn: https://www.linkedin.com/in/muhammadsaadahmed/
+- LinkedIn (company): https://www.linkedin.com/company/saad-tech-works
+- GitHub: https://github.com/saadummati
+- YouTube / Twitter / Instagram: empty in repo
+
+### Stats (as shown on site)
+- Projects Completed: 10+
+- Success Rate: 98%
+- LinkedIn Followers: 10k+
+- Average Rating: 5.0 ★
+- Availability: 24/7 (static value)
+- Schedule stats: 1-1 Meetings: 30+; Happy Clients: 12+; Years Experience: 2+
+
+### About / Bio (extracted headings & summary)
+- About heading: "Hi, I'm Muhammad Saad Ahmed — AI Engineer"
+- Bio (summary present in site.ts):
+  - BSCS graduate (NUTECH '25)
+  - Current role (repo): AI Automation Engineer at HashDev Solutions (July 2026 - Present)
+  - Previous roles: AI Systems Engineer at CloudGate Technologies (March 2026 - July 2026); Co-Founder & COO at SHS Creators (2025 - 2026); LinkedIn Creator at Naano (June 2026 - Present); Prompt Engineer at OptiExperts (Sep 2024 - Mar 2025)
+  - Focus areas: on-device ML (ONNX, quantized models), LLM-powered agents, workflow automation, Android (Kotlin), semantic search, full-stack web development, and product/leadership responsibilities.
+
+### Specialties, certifications & notable skills (copied from site.ts specialties list)
+- On-Device AI & ML (ONNX, quantized models)
+- AI Agents & LLM Integration
+- Workflow & Business Process Automation
+- Android Development (Kotlin, MVVM)
+- AI Integration & Semantic Search (CLIP, DINOv2)
+- Full-Stack Web Development
+- Google Professional ML Engineer (Certified)
+- AWS ML Specialty (Certified)
+- AWS Certified DevOps Engineer – Professional (Certified)
+- National Financial Literacy Program for Youth (NIBAF)
+- Create a Website Using WordPress (Coursera)
+- Content Creation (LinkedIn, 10,000+ followers)
+- Mobile App Architecture
+- API Development & Integration
+- Team Leadership & Product Ownership
+
+### Work experience (entries extracted from src/data/experience.ts)
+- HashDev Solutions — AI Automation Engineer (Onsite), July 2026 - Present
+  - Company URL: https://hashdevsol.com
+  - Tags: AI Automation, Workflow Automation, AI Agents
+  - Gallery artifacts referenced (local paths): agent-tool-calling-diagram, n8n-workflow-diagram, model-pipeline-diagram, architecture-review-notes
+
+- CloudGate Technologies — AI Systems Engineer (Onsite), March 2026 - July 2026
+  - Company URL: https://www.cloudgatetechnologies.com
+  - Focus: On-device AI features (ARCore + depth & ONNX), ClipGallery on-device gallery app, Android/Kotlin
+  - Tags: On-Device AI, ONNX, Android, Kotlin, ARCore, MVVM
+
+- SHS Creators — Co-Founder & COO (Onsite), 2025 - 2026
+  - Company URL: https://shscreators.com
+  - Focus: AI automation & digital marketing agency, AI chatbot and workflow automation delivery
+  - Tags: Leadership, AI Agents, Automation, Operations
+
+- Naano — LinkedIn Creator (Remote), June 2026 - Present
+  - Company URL: https://www.naano.xyz
+  - Tags: LinkedIn, Content Creation, B2B Marketing
+
+- OptiExperts — Prompt Engineer / Front-End Developer (Remote/Intern), Sep 2024 - Mar 2025
+  - Company URL: https://optiexperts.com
+  - Tags: Prompt Engineering, LLMs, ChatBots (Prompt Engineer entry); Shopify/Front-End/E-commerce (Front-End entry in app copy)
+
+(Note: some role titles vary slightly between `src/data/experience.ts` and `src/app/src/data/experience.ts`; I included both inferred variants where relevant.)
+
+### Meetings & booking (from src/data/meetings.ts)
+Active meeting types present in repo (each has its own `/schedule/[slug]` page):
+- Technical Consultation — 30 min — "Get expert advice on your Android or web project. Discuss architecture, tech stack, and best practices." (active)
+- On-Device AI Consultation — 30 min — "Discuss whether an on-device AI feature..." (active)
+- Android Architecture Review — 45 min — Deep-dive review of Android architecture (active)
+- Career & Job Search Mentorship — 45 min — Mentoring for developers (active)
+- Quick Questions — 15 min — Short calls for immediate answers (active)
+- Project Discussion — 45 min — Project scoping and quotes (active)
+- Freelance / Contract Discussion — 30 min — Scope and terms discussion (active)
+- General Meeting — 30 min — Flexible discussion (active)
+
+### Notes & places to review in the repo
+- Primary content location: `src/data/site.ts` (and a duplicate under `src/app/src/data/site.ts`). Update this file to change contact, bio, socials, specialties, and stats.
+- Work experience details: `src/data/experience.ts` and `src/app/src/data/experience.ts`.
+- Meeting types & schedule stats: `src/data/meetings.ts`.
+- Services listing (descriptions, FAQs, pricing placeholders): `src/data/services.ts`.
+
+---
+
+If you'd like, I can now:
+- Redact or omit sensitive fields (email, WhatsApp) before adding this section to the public README, or mark them as "private".
+- Synchronize this profile section into `src/app/README.md` so both READMEs match.
+- Generate a short, privacy-safe public summary that excludes contact details and private identifiers for publishing on public sites.
+
+Tell me which you'd prefer and I'll update the README accordingly.
