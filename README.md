@@ -68,3 +68,74 @@ Still placeholder — replace before launch:
   reference site's 5-category structure; remove or repurpose if not relevant to you
 - Brand accent color (`--accent` in `globals.css`) — currently a neutral purple
 - Calendly link is live; Anthropic API key still needed (see above)
+
+---
+
+## Additional README details (added)
+
+### Features
+- Fast SSR/SSG pages with Next.js (App Router) and TypeScript
+- Tailwind CSS for utility-first styling and easy design adjustments
+- Pre-built sections: hero, services, timeline, testimonials, blog, links, chat
+- Simple data-driven personalization: edit `src/data/*.ts` to change content
+- Embedded Calendly scheduling and optional AI chat integration (Claude/Anthropic)
+
+### Requirements
+- Node.js 18.x or later recommended
+- npm (or Yarn) installed
+
+### Local development
+- Start dev server:
+  ```bash
+  npm run dev
+  ```
+- Build for production locally:
+  ```bash
+  npm run build
+  npm start
+  ```
+(If `npm start` is not yet defined in package.json, use `next start` after a successful build.)
+
+### Environment variables
+- ANTHROPIC_API_KEY — (optional) Claude/Anthropic API key used by `/chat`.
+- NEXT_PUBLIC_CALENDLY_URL — (optional) override the Calendly link embedded on schedule pages.
+
+Create a `.env.local` at the repo root and restart the dev server after changing env vars.
+
+### Personalization guide
+- Most site content lives in `src/data/` — edit `site.ts`, `services.ts`, `experience.ts`,
+  `meetings.ts`, `blog.ts`, and `testimonials.ts` to update copy and assets.
+- Replace placeholder images, avatars, and logos in the `public/` folder where applicable.
+- Update the accent color in `src/app/globals.css` (CSS variable `--accent`) to match your brand.
+
+### Deployment
+- Vercel is recommended for zero-config deploys of Next.js apps. Connect the repo and
+  Vercel will handle builds automatically.
+- Alternatively, any platform that supports Next.js (Node 18+) will work. Make sure to
+  set your environment variables in the hosting platform (ANTHROPIC_API_KEY, NEXT_PUBLIC_CALENDLY_URL).
+
+### Troubleshooting & tips
+- If the chat page shows "not connected yet", confirm `ANTHROPIC_API_KEY` is set and valid.
+- If Calendly doesn't load, verify `NEXT_PUBLIC_CALENDLY_URL` or the embedded link in
+  `src/components/ScheduleEmbed.tsx`.
+- Tailwind styles not applying? Ensure `globals.css` is imported in your root layout.
+
+### Contributing
+If you want to make changes or improvements:
+1. Create a new branch from the default branch.
+2. Open a PR with a clear description of your changes.
+3. Keep commits focused and add a short, explanatory commit message.
+
+If you'd like, I can also:
+- Sync the top-level README additions into `src/app/README.md` so both files match.
+- Add a short 'How to personalize' checklist or PR template.
+
+### License
+Include your preferred license file at the repo root (e.g., `LICENSE`). If none is present,
+this repo currently has no explicit license — add one before sharing commercially.
+
+### Contact
+For questions or help customizing this repo, contact Saad via the details in `src/data/site.ts`.
+
+---
+
