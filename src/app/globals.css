@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --surface: #f4f4f6;
+  --surface-2: #e9e9ec;
+  --foreground: #0c0d0f;
+  --muted: #5b5c63;
+  --accent: #6d5bff; /* placeholder accent -- swap for your brand color later */
+  --accent-2: #22d3ee;
+  --border: #dcdce0;
+}
+
+.dark {
+  --background: #06070a;
+  --surface: #0e1015;
+  --surface-2: #15171d;
+  --foreground: #f4f4f5;
+  --muted: #93949c;
+  --accent: #7c6bff;
+  --accent-2: #22d3ee;
+  --border: #21232b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-border: var(--border);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Hard safety net: nothing on this site should ever cause horizontal scroll, but a
+   single wide/overflowing element anywhere is enough to create phantom empty space
+   on mobile. This guarantees the viewport width is always the real width.
+   Uses `clip` rather than `hidden` -- `overflow-x: hidden` on body/html is a known,
+   documented cause of `position: sticky` silently breaking on descendants (the navbar
+   in this case); `clip` gives the same protection without that side effect. */
+html,
+body {
+  overflow-x: clip;
+  width: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.container-page {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* ---------- Marquee (speed set per-row via inline style) ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pausing on hover lets someone actually read/click an icon instead of chasing a
+   moving target -- scoped to marquee-row so it doesn't affect other animations. */
+.marquee-row:hover .marquee-track,
+.marquee-row:active .marquee-track {
+  animation-play-state: paused;
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* ---------- Futuristic hero background ---------- */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(1.08); }
+}
+
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.1); }
+}
+
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 20px) scale(0.95); }
+}
+
+.animate-float-a {
+  animation: float-a 16s ease-in-out infinite;
+}
+
+.animate-float-b {
+  animation: float-b 20s ease-in-out infinite;
+}
+
+.animate-float-c {
+  animation: float-c 13s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-a,
+  .animate-float-b,
+  .animate-float-c,
+  .animate-pulse-glow,
+  .animate-fade-up,
+  .animate-slide-in-right {
+    animation: none !important;
+  }
+}
+
+/* ---------- Liquid glass ---------- */
+/* A frosted, faintly-refractive surface -- strong blur, low-opacity fill, a hairline
+   highlight on top, and (where supported) a subtle SVG turbulence displacement for the
+   "liquid" wobble. Falls back gracefully to a plain frosted-blur look in browsers that
+   don't support filter references inside backdrop-filter (e.g. Firefox). */
+.liquid-glass {
+  position: relative;
+  background: color-mix(in srgb, var(--surface) 35%, transparent);
+  backdrop-filter: blur(18px) url(#liquid-glass-distortion);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent-2) 25%, transparent),
+    0 8px 30px color-mix(in srgb, black 20%, transparent);
+}
+
+.liquid-glass-strong {
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
+  backdrop-filter: blur(22px) url(#liquid-glass-distortion);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+/* Lighter-weight glass for elements that are always on screen and re-paint on every
+   scroll frame (the sticky navbar) -- skips the SVG turbulence filter, which is the
+   expensive part, and uses a smaller blur radius. */
+.liquid-glass-light {
+  position: relative;
+  background: color-mix(in srgb, var(--surface) 40%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent-2) 25%, transparent),
+    0 8px 30px color-mix(in srgb, black 20%, transparent);
+}
+
+/* ---------- Chat message markdown ---------- */
+.chat-markdown p {
+  margin: 0;
+}
+.chat-markdown p + p {
+  margin-top: 0.6em;
+}
+.chat-markdown ul,
+.chat-markdown ol {
+  margin: 0.4em 0;
+  padding-left: 1.25em;
+}
+.chat-markdown ul {
+  list-style: disc;
+}
+.chat-markdown ol {
+  list-style: decimal;
+}
+.chat-markdown li + li {
+  margin-top: 0.2em;
+}
+.chat-markdown strong {
+  font-weight: 600;
+}
+.chat-markdown code {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+.chat-markdown a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.custom-cursor-active,
+.custom-cursor-active a,
+.custom-cursor-active button {
+  cursor: none;
+}
+
+/* ---------- Keyboard focus ---------- */
+/* Explicit focus ring for keyboard navigation -- important since the custom cursor
+   removes the native pointer as a spatial reference, so focus needs to be unmistakable. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
