@@ -57,7 +57,7 @@ export default function Footer() {
                   alt={site.name}
                   fill
                   sizes="88px"
-                  quality={85}
+                  unoptimized
                   className="object-cover"
                 />
               </div>
@@ -67,7 +67,7 @@ export default function Footer() {
             <div className="mt-5 space-y-2.5 text-sm text-muted">
               <a
                 href={`mailto:${site.email}`}
-                className="group flex items-center gap-2 transition-colors hover:text-foreground"
+                className="cursor-hover group flex items-center gap-2 transition-all hover:text-foreground active:scale-95"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-2 transition-colors group-hover:bg-accent/15 group-hover:text-accent">
                   <Mail size={13} />
@@ -128,9 +128,9 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label={s.label}
                 title={s.label}
-                className="cursor-hover flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-muted transition-all hover:scale-110 hover:bg-accent/15 hover:text-accent"
+                className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full bg-surface-2 text-muted transition-all hover:scale-110 hover:bg-accent/15 hover:text-accent"
               >
-                <s.Icon size={15} />
+                <s.Icon size={16} />
               </a>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default function Footer() {
 
           <a
             href="#top"
-            className="cursor-hover liquid-glass-light flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground/90 transition-transform hover:scale-105"
+            className="cursor-hover liquid-glass-light flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground/90 transition-all hover:scale-105 active:scale-95"
           >
             Back to top
             <ArrowUp size={13} />

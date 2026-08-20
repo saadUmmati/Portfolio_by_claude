@@ -19,8 +19,8 @@ export default function LinksPage() {
             src="/images/profile-image.jpg"
             alt={site.name}
             fill
-            sizes="192px"
-            quality={85}
+            sizes="80px"
+            unoptimized
             className="object-cover"
           />
         </div>
@@ -42,7 +42,7 @@ export default function LinksPage() {
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noreferrer" : undefined}
-                  className="group flex items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3.5 transition-colors hover:border-accent/60"
+                  className="group flex min-h-[44px] items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3.5 transition-colors hover:border-accent/60"
                 >
                   <span
                     className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${

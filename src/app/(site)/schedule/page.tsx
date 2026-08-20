@@ -54,7 +54,7 @@ export default function SchedulePage() {
             <Reveal key={m.slug} delay={i * 60}>
               <Link
                 href={`/schedule/${m.slug}`}
-                className="cursor-hover group flex h-full flex-col rounded-2xl border border-accent/20 bg-surface p-6 transition-all hover:-translate-y-0.5 hover:border-accent/60"
+                className="cursor-hover group flex h-full flex-col rounded-2xl border border-accent/20 bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg active:scale-95"
               >
                 <span className="flex w-fit items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs text-muted">
                   <Clock size={11} />
@@ -78,7 +78,7 @@ export default function SchedulePage() {
             href={`https://wa.me/${site.whatsapp}`}
             target="_blank"
             rel="noreferrer"
-            className="cursor-hover text-accent hover:underline"
+            className="cursor-hover text-accent transition-colors hover:text-accent-2"
           >
             Message me directly
           </a>

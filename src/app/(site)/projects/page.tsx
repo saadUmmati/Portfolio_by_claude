@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           <Reveal key={p.slug} delay={(i % 3) * 80}>
             <Link
               href={`/projects/${p.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
+              className="cursor-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
             >
               <div className="relative h-44 w-full overflow-hidden bg-surface-2">
                 {p.image ? (
@@ -36,6 +36,7 @@ export default function ProjectsPage() {
                     alt={`Screenshot of ${p.title}, a ${p.category.toLowerCase()} project`}
                     fill
                     sizes="400px"
+                    unoptimized
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
@@ -76,7 +77,7 @@ export default function ProjectsPage() {
           href={site.socials.github}
           target="_blank"
           rel="noreferrer"
-          className="cursor-hover mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+          className="cursor-hover mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-2 active:scale-95"
         >
           github.com/saadummati
           <ArrowUpRight size={14} />

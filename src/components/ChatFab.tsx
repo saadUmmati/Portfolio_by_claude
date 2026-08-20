@@ -24,6 +24,7 @@ export default function ChatFab() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [isTouchInfo, setIsTouchInfo] = useState(false);
   // Only real mouse-driven devices get hover-to-open -- touch devices rely on
   // tap-to-toggle only. Mixing both on a touchscreen is what caused the
   // "hover doesn't work properly" issue: mobile browsers synthesize a hover-like
@@ -38,8 +39,9 @@ export default function ChatFab() {
           absolutely positioned so it never expands this hoverable area. */}
       <div
         className="fixed bottom-6 right-6 z-40 h-14 w-14"
-        onMouseEnter={canHover ? () => setOpen(true) : undefined}
-        onMouseLeave={canHover ? () => setOpen(false) : undefined}
+        onTouchStart={() => setIsTouchInfo(true)}
+        onMouseEnter={canHover && !isTouchInfo ? () => setOpen(true) : undefined}
+        onMouseLeave={canHover && !isTouchInfo ? () => setOpen(false) : undefined}
       >
         {/* Sub-options -- only mounted while open, so there's no DOM element for
             the browser to hit-test against when closed. */}
@@ -80,7 +82,11 @@ export default function ChatFab() {
         {/* Main toggle -- the only interaction on touch devices, and a fallback
             click-to-toggle on desktop too (in case hover was missed). */}
         <button
-          onClick={() => setOpen((o) => !o)}
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            setOpen((o) => !o);
+          }}
           aria-label="Contact options"
           aria-expanded={open}
           className="cursor-hover flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-black/20 transition-transform hover:scale-105"

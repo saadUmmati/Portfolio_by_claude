@@ -51,6 +51,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             alt={`Screenshot of ${project.title}, a ${project.category.toLowerCase()} project`}
             fill
             sizes="(min-width: 768px) 800px, 100vw"
+            unoptimized
             className="object-cover"
             priority
           />
@@ -104,7 +105,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           {project.gallery.map((g) => (
             <div key={g.label} className="overflow-hidden rounded-2xl border border-border bg-surface-2">
               <div className="relative h-48 w-full">
-                <Image src={g.src} alt={g.label} fill sizes="400px" className="object-cover" />
+                <Image src={g.src} alt={g.label} fill sizes="400px" unoptimized className="object-cover" />
               </div>
               <p className="p-3 text-xs text-muted">{g.label}</p>
             </div>

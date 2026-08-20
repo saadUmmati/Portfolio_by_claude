@@ -23,7 +23,7 @@ export default function BlogPage() {
           <Reveal key={post.slug} delay={i * 60}>
             <Link
               href={`/blog/${post.slug}`}
-              className="group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
+              className="cursor-hover group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
             >
               <div className="h-36 w-full overflow-hidden bg-surface-2">
                 <BlogHeaderArt slug={post.slug} className="h-full w-full" />

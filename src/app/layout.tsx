@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { site } from "@/data/site";
 
@@ -41,6 +41,12 @@ export const metadata: Metadata = {
     shortcut: "/images/profile-image.jpg",
     apple: "/images/profile-image.jpg",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 // Structured data (schema.org Person) -- helps search engines understand who this

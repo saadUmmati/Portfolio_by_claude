@@ -28,7 +28,7 @@ export default function ServicesPage() {
           <button
             key={c}
             onClick={() => setCategory(c)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+            className={`cursor-hover flex min-h-[44px] items-center rounded-full border px-4 py-1.5 text-sm transition-all active:scale-95 ${
               category === c
                 ? "border-accent bg-accent text-white"
                 : "border-border text-muted hover:bg-surface"
@@ -46,7 +46,7 @@ export default function ServicesPage() {
           <Reveal key={s.slug} delay={(i % 3) * 80}>
             <Link
               href={`/services/${s.slug}`}
-              className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/60"
+              className="cursor-hover flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
             >
               {s.gallery[0]?.src ? (
                 <div className="relative h-32 overflow-hidden rounded-xl bg-surface-2">
@@ -55,6 +55,7 @@ export default function ServicesPage() {
                     alt={s.gallery[0].label}
                     fill
                     sizes="400px"
+                    unoptimized
                     className="object-cover"
                   />
                 </div>

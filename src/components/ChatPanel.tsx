@@ -28,7 +28,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
           <button
             aria-label="Close chat"
             onClick={onClose}
-            className="cursor-hover flex h-8 w-8 items-center justify-center rounded-full text-muted hover:bg-surface-2 hover:text-foreground"
+            className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full text-muted hover:bg-surface-2 hover:text-foreground"
           >
             <X size={16} />
           </button>

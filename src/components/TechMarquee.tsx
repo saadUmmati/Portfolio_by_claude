@@ -34,7 +34,7 @@ export default function TechMarquee() {
           const duration = ROW_DURATIONS[i % ROW_DURATIONS.length];
           const reverse = i % 2 === 1;
           return (
-            <div key={i} className="marquee-row overflow-x-hidden overflow-y-visible py-6">
+            <div key={i} className="marquee-row overflow-hidden py-6">
               <div
                 className="marquee-track flex w-max gap-6"
                 style={
@@ -47,10 +47,12 @@ export default function TechMarquee() {
                 {[...longRow, ...longRow].map((item, j) => (
                   <div
                     key={`${item.label}-${j}`}
-                    className="group relative flex h-32 w-32 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface transition-transform duration-300 hover:z-10 hover:scale-125 hover:border-accent"
+                    className="group relative flex h-32 w-32 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface transition-all duration-300 hover:z-10 hover:scale-110 hover:border-accent"
                   >
-                    <item.Icon size={56} color={item.color} />
-                    <span className="pointer-events-none absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium whitespace-nowrap text-foreground opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100">
+                    <div className="transition-all duration-300 group-hover:blur-[2px] group-hover:opacity-40">
+                      <item.Icon size={56} color={item.color} />
+                    </div>
+                    <span className="pointer-events-none absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border bg-background/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold whitespace-nowrap text-foreground opacity-0 shadow-xl transition-all duration-300 group-hover:opacity-100 group-hover:scale-110">
                       {item.label}
                     </span>
                   </div>

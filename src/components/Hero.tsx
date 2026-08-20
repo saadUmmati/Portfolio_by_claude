@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
               href="/services"
-              className="cursor-hover rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              className="cursor-hover inline-flex min-h-[44px] items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all hover:opacity-90 active:scale-95"
             >
               View my Services
             </Link>
@@ -32,7 +32,7 @@ export default function Hero() {
               href={`https://wa.me/${site.whatsapp}`}
               target="_blank"
               rel="noreferrer"
-              className="liquid-glass cursor-hover rounded-full px-6 py-3 text-sm font-medium transition-transform hover:scale-[1.03]"
+              className="liquid-glass cursor-hover inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-95"
             >
               Get in Touch
             </a>

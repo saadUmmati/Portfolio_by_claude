@@ -46,7 +46,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="container-page mx-auto max-w-2xl py-10 sm:py-12 md:py-16">
-      <Link href="/blog" className="text-sm text-accent hover:underline">
+      <Link href="/blog" className="cursor-hover flex min-h-[44px] items-center text-sm text-accent hover:underline py-1">
         ← Back to Blog
       </Link>
 

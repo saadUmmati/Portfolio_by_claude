@@ -33,7 +33,7 @@ export default function ExperienceTimeline() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+              className={`cursor-hover flex min-h-[44px] items-center rounded-full border px-4 py-1.5 text-sm transition-all active:scale-95 ${
                 filter === f
                   ? "border-accent bg-accent text-white"
                   : "border-border text-muted hover:bg-surface"
@@ -91,7 +91,7 @@ export default function ExperienceTimeline() {
                       href={item.companyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium hover:bg-surface-2"
+                      className="cursor-hover flex min-h-[44px] items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-all hover:bg-surface-2 active:scale-95"
                     >
                       Visit {item.company}
                       <ExternalLink size={12} />
@@ -116,6 +116,7 @@ export default function ExperienceTimeline() {
                             alt={g.label}
                             fill
                             sizes="160px"
+                            unoptimized
                             className="object-cover"
                           />
                         </div>

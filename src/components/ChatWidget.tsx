@@ -108,7 +108,7 @@ export default function ChatWidget({ autoFocus = true }: { autoFocus?: boolean }
             <button
               key={p}
               onClick={() => sendMessage(p)}
-              className="cursor-hover rounded-full border border-border px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent hover:text-foreground"
+              className="cursor-hover flex min-h-[44px] items-center rounded-full border border-border px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent hover:text-foreground"
             >
               {p}
             </button>
@@ -129,13 +129,13 @@ export default function ChatWidget({ autoFocus = true }: { autoFocus?: boolean }
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask a question…"
           autoFocus={autoFocus}
-          className="cursor-hover flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
+          className="cursor-hover min-h-[44px] flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
           aria-label="Send"
-          className="cursor-hover flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="cursor-hover flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           <Send size={16} />
         </button>
