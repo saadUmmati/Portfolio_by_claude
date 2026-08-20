@@ -17,22 +17,22 @@ export default function TestimonialsMarquee() {
             </span>
           </h2>
         </div>
-        <Link href="/testimonials" className="hidden text-sm text-accent hover:underline md:block">
+        <Link href="/testimonials" className="cursor-hover hidden text-sm text-accent transition-colors hover:text-accent-2 md:block">
           View All Testimonials →
         </Link>
       </div>
 
-      <div className="mask-fade-x overflow-hidden">
+      <div className="mask-fade-x marquee-row overflow-hidden py-4">
         <div
-          className="flex w-max gap-6 py-2"
-          style={{ animation: "marquee 55s linear infinite" }}
+          className="marquee-track flex w-max min-w-max gap-6"
+          style={{ "--marquee-duration": "55s" } as React.CSSProperties}
         >
           {[...row, ...row].map((t, i) => {
             const PlatformIcon = platformIcons[t.platform];
             return (
               <div
                 key={i}
-                className="w-80 shrink-0 rounded-2xl border border-border bg-surface p-6"
+                className="w-80 shrink-0 rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10 cursor-hover"
               >
                 <div className="flex items-center justify-between">
                   <span className="flex items-center gap-1.5 text-xs text-muted">
@@ -70,7 +70,7 @@ export default function TestimonialsMarquee() {
 
       <Link
         href="/testimonials"
-        className="container-page mt-6 block text-sm text-accent hover:underline md:hidden"
+        className="cursor-hover container-page mt-6 flex min-h-[44px] items-center text-sm text-accent transition-colors hover:text-accent-2 md:hidden"
       >
         View All Testimonials →
       </Link>

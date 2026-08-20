@@ -48,7 +48,8 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                     src={service.gallery[slide].src!}
                     alt={service.gallery[slide].label}
                     fill
-                    sizes="(min-width: 768px) 800px, 100vw"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    unoptimized
                     className="object-cover"
                     priority={slide === 0}
                   />
@@ -94,7 +95,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                       }`}
                     >
                       {g.src ? (
-                        <Image src={g.src} alt={g.label} fill sizes="150px" className="object-cover" />
+                        <Image src={g.src} alt={g.label} fill sizes="150px" unoptimized className="object-cover" />
                       ) : (
                         <span className="flex h-full items-center justify-center px-1 text-center text-xs text-muted">
                           {g.label}

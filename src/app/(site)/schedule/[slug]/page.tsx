@@ -19,7 +19,7 @@ export default async function MeetingTypePage({
 
   return (
     <div className="container-page py-10 sm:py-12 md:py-16">
-      <Link href="/schedule" className="cursor-hover flex w-fit items-center gap-1.5 text-sm text-accent hover:underline">
+      <Link href="/schedule" className="cursor-hover flex min-h-[44px] w-fit items-center gap-1.5 text-sm text-accent hover:underline py-1">
         <ArrowLeft size={14} />
         Back to Schedule
       </Link>

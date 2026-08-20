@@ -52,7 +52,7 @@ export default function ProjectContactSection() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/60"
+                className="flex min-h-[44px] items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/60"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
                   <c.Icon size={16} />
@@ -97,7 +97,7 @@ export default function ProjectContactSection() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Jane Doe"
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="mt-1.5 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
               />
             </div>
             <div>
@@ -108,7 +108,7 @@ export default function ProjectContactSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="jane@company.com"
-                className="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="mt-1.5 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
               />
             </div>
             <div>
@@ -128,7 +128,7 @@ export default function ProjectContactSection() {
             </div>
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
             >
               Send message
               <Send size={15} />

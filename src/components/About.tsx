@@ -22,7 +22,7 @@ export default function About() {
               alt={`${site.name}, ${site.title}`}
               fill
               sizes="(min-width: 768px) 420px, 100vw"
-              quality={85}
+              unoptimized
               className="object-cover"
               priority
             />
@@ -51,7 +51,7 @@ export default function About() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/services"
-                className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+                className="cursor-hover inline-flex min-h-[44px] items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all hover:opacity-90 active:scale-95"
               >
                 View Services
               </Link>
@@ -59,7 +59,7 @@ export default function About() {
                 href={`https://wa.me/${site.whatsapp}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-border px-6 py-3 text-sm font-medium hover:bg-surface"
+                className="cursor-hover inline-flex min-h-[44px] items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium transition-all hover:bg-surface active:scale-95"
               >
                 Hire Now
               </a>
@@ -67,7 +67,7 @@ export default function About() {
                 href={site.socials.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-border px-6 py-3 text-sm font-medium hover:bg-surface"
+                className="cursor-hover inline-flex min-h-[44px] items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-medium transition-all hover:bg-surface active:scale-95"
               >
                 Connect on LinkedIn
               </a>

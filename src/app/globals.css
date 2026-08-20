@@ -39,16 +39,10 @@
 /* Hard safety net: nothing on this site should ever cause horizontal scroll, but a
    single wide/overflowing element anywhere is enough to create phantom empty space
    on mobile. This guarantees the viewport width is always the real width.
-   Uses `clip` rather than `hidden` -- `overflow-x: hidden` on body/html is a known,
-   documented cause of `position: sticky` silently breaking on descendants (the navbar
-   in this case); `clip` gives the same protection without that side effect. */
-html,
+   We apply overflow-x: hidden to body only, as applying clip/hidden to html is a known
+   issue for position: sticky elements. */
 body {
-  overflow-x: clip;
-  width: 100%;
-}
-
-body {
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -70,6 +64,10 @@ body {
   to {
     transform: translateX(-50%);
   }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 50s) linear infinite var(--marquee-direction, normal);
 }
 
 /* Pausing on hover lets someone actually read/click an icon instead of chasing a
@@ -140,7 +138,7 @@ body {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.5s ease-out both;
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes slide-in-right {
@@ -155,7 +153,7 @@ body {
 }
 
 .animate-slide-in-right {
-  animation: slide-in-right 0.3s ease-out both;
+  animation: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

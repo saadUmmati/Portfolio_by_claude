@@ -14,7 +14,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <CustomCursor />
       <CursorPositionHUD />
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full overflow-x-clip">{children}</main>
       <Footer />
       <ChatFab />
     </>

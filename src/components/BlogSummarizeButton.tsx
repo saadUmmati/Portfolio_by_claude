@@ -38,7 +38,7 @@ export default function BlogSummarizeButton({
       {!summary && !loading && (
         <button
           onClick={handleSummarize}
-          className="cursor-hover flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          className="cursor-hover flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           <Sparkles size={15} />
           Summarize with AI
@@ -60,7 +60,7 @@ export default function BlogSummarizeButton({
           </div>
           <button
             onClick={handleSummarize}
-            className="cursor-hover mt-4 text-xs text-accent hover:underline"
+            className="cursor-hover mt-4 flex min-h-[44px] items-center text-xs text-accent hover:underline py-1"
           >
             Regenerate
           </button>

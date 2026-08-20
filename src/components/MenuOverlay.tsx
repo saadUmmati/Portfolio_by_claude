@@ -30,22 +30,24 @@ export default function MenuOverlay({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
       <button
+        type="button"
         aria-label="Close menu"
         onClick={onClose}
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 cursor-pointer bg-black/50 backdrop-blur-sm"
       />
 
-      <div className="liquid-glass-strong animate-fade-up relative flex w-full max-w-md flex-col rounded-3xl p-6 sm:max-w-lg">
+      <div className="liquid-glass-strong animate-fade-up relative z-10 flex w-full max-w-md max-h-[90vh] overflow-y-auto flex-col rounded-3xl p-6 sm:max-w-lg">
         <div className="flex items-center justify-between text-xs text-muted">
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
             available for work
           </span>
           <button
+            type="button"
             onClick={onClose}
-            className="cursor-hover flex items-center gap-1 hover:text-foreground"
+            className="cursor-hover flex min-h-[44px] items-center gap-1 hover:text-foreground p-2"
           >
             close
             <X size={13} />

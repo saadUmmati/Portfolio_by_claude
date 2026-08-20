@@ -55,7 +55,7 @@ fun extractEmbedding(bitmap: Bitmap): FloatArray {
     tags: ["MERN", "Computer Vision", "Diffusion Models"],
     href: "https://github.com/saadUmmati/E-wardrobe-fyp",
     gradient: "from-sky-500 via-cyan-400 to-emerald-400",
-    image: "/images/projects/ewardrobe-hero.jpg",
+    image: "/images/projects/vton.jfif",
     roleHighlights: [
       {
         title: "AI Model Integration",
@@ -204,6 +204,7 @@ export const getProductBySlug = (slug: string) =>
     tags: ["Kotlin", "MVVM", "Retrofit"],
     href: "https://github.com/saadUmmati/OmniHub-Android-App",
     gradient: "from-slate-700 via-violet-600 to-indigo-500",
+    image: "/images/projects/omniHubApp2.jfif",
     codeSnippet: {
       language: "kotlin",
       code: `class WeatherViewModel(private val repo: WeatherRepository) : ViewModel() {
@@ -227,6 +228,7 @@ export const getProductBySlug = (slug: string) =>
       "A full marketing site for Arab Relocation Services, a Dubai-based moving company. Built with vanilla HTML, CSS, and JavaScript (no framework) -- a responsive hero section, an about section, a services grid covering residential, corporate, and specialty relocation, an instant-quote/estimation section, a project showcase, a blog section, and a newsletter signup, with a mobile nav drawer and WhatsApp click-to-call built in. No live demo is currently hosted for this one -- it's a client site delivered as source, not deployed under this repo.",
     tags: ["HTML", "CSS", "JavaScript"],
     href: "https://github.com/saadUmmati/Original-ARS",
+    image: "/images/projects/Arab_Relocation_Services.jfif",
     gradient: "from-neutral-500 via-stone-500 to-neutral-400",
     codeSnippet: {
       language: "javascript",

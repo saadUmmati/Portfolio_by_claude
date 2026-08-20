@@ -42,6 +42,7 @@ export default function ProjectCarousel() {
             alt={`Screenshot of ${project.title}, a ${project.category.toLowerCase()} project`}
             fill
             sizes="(min-width: 640px) 640px, 100vw"
+            unoptimized
             className="object-cover"
             priority={index === 0}
           />
@@ -65,13 +66,13 @@ export default function ProjectCarousel() {
       <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
       <p className="mt-1.5 text-base text-muted">{project.description}</p>
 
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-4">
           <a
             href={project.href}
             target="_blank"
             rel="noreferrer"
-            className="cursor-hover flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+            className="cursor-hover flex min-h-[44px] items-center gap-1 text-sm font-medium text-accent hover:underline py-2"
           >
             View Project
             <ArrowUpRight size={15} />
@@ -81,7 +82,7 @@ export default function ProjectCarousel() {
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="cursor-hover flex items-center gap-1 text-sm font-medium text-muted hover:text-foreground hover:underline"
+              className="cursor-hover flex min-h-[44px] items-center gap-1 text-sm font-medium text-muted hover:text-foreground hover:underline py-2"
             >
               Live Demo
               <ArrowUpRight size={15} />
@@ -92,14 +93,14 @@ export default function ProjectCarousel() {
           <button
             aria-label="Previous project"
             onClick={prev}
-            className="cursor-hover flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
+            className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
           >
             <ChevronLeft size={16} />
           </button>
           <button
             aria-label="Next project"
             onClick={next}
-            className="cursor-hover flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
+            className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
           >
             <ChevronRight size={16} />
           </button>

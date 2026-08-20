@@ -18,6 +18,11 @@ export default function Reveal({ children, delay = 0, className = "" }: RevealPr
     const node = ref.current;
     if (!node) return;
 
+    if (!("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -25,7 +30,7 @@ export default function Reveal({ children, delay = 0, className = "" }: RevealPr
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0, rootMargin: "100px" }
     );
 
     observer.observe(node);
