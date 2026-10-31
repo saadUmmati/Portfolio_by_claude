@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migrate-sanity": "tsx scripts/migrate-to-sanity.ts"
+    "migrate-sanity": "tsx scripts/migrate-to-sanity.ts",
+    "audit:palette": "node scripts/palette-audit.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",
@@ -26,6 +27,7 @@
     "sanity": "^6.6.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

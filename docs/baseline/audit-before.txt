@@ -1,0 +1,19 @@
+
+> saad-portfolio@0.1.0 audit:palette
+> node scripts/palette-audit.mjs
+
+
+PALETTE AUDIT  (allowed: #000000 #e2e8f0 #8b5cf6, no gradient/glow/blur/shadow/tint)
+
+  blur/glow                31   in 11 files
+  gradient                 46   in 22 files
+  off-palette-hex          61   in 10 files
+  opacity-tint             91   in 29 files
+  shadow                   15   in 11 files
+  tw-default-colour        34   in 16 files
+  white/black-utility      25   in 16 files
+
+  TOTAL VIOLATIONS: 303
+
+  (re-run with --verbose to list every line)
+
