@@ -1,48 +1,45 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { dist, dur, ease, prefersReducedMotion } from "@/lib/motion";
 
 interface RevealProps {
   children: React.ReactNode;
-  delay?: number; // ms
+  delay?: number; // ms (same API as before, so every existing <Reveal> upgrades automatically)
   className?: string;
 }
 
-// Fades + lifts content in once it scrolls into view. Respects users who have
-// motion turned off at the OS level via the CSS animation itself (see globals.css).
+// Fades + lifts content in once, when it scrolls into view. Uses the shared motion spec;
+// with "reduce motion" on, content is simply shown.
 export default function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    if (!("IntersectionObserver" in window)) {
-      setVisible(true);
+  useGSAP(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (prefersReducedMotion()) {
+      gsap.set(el, { autoAlpha: 1 });
       return;
     }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0, rootMargin: "100px" }
+    gsap.fromTo(
+      el,
+      { autoAlpha: 0, y: dist.md },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: dur.base,
+        delay: delay / 1000,
+        ease: ease.out,
+        clearProps: "transform",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true },
+      }
     );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  }, { scope: ref });
 
   return (
-    <div
-      ref={ref}
-      className={`${visible ? "animate-fade-up" : "opacity-0"} ${className}`}
-      style={visible ? { animationDelay: `${delay}ms` } : undefined}
-    >
+    <div ref={ref} className={`opacity-0 ${className}`}>
       {children}
     </div>
   );

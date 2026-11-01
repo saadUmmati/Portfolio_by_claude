@@ -133,7 +133,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <p className="mt-1 text-sm text-muted">
           A representative snippet showing the core approach -- not the full source.
         </p>
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-surface p-5">
+        <div data-lenis-prevent className="mt-4 overflow-x-auto rounded-2xl border border-border bg-surface p-5">
           <div className="mb-3 flex items-center gap-2 text-xs text-muted">
             <span className="h-2.5 w-2.5 rounded-full border border-ink" />
             <span className="h-2.5 w-2.5 rounded-full border border-ink" />

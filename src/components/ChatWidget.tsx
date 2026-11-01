@@ -62,7 +62,7 @@ export default function ChatWidget({ autoFocus = true }: { autoFocus?: boolean }
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
-      <div className="flex-1 space-y-5 overflow-y-auto p-4 sm:p-5">
+      <div data-lenis-prevent className="flex-1 space-y-5 overflow-y-auto p-4 sm:p-5">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
             <div

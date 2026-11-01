@@ -102,7 +102,7 @@ export default function ExperienceTimeline() {
                 <p className="mt-2 text-sm text-muted">{item.description}</p>
 
                 {item.gallery.length > 0 && (
-                  <div className="mt-4 flex gap-3 overflow-x-auto">
+                  <div data-lenis-prevent className="mt-4 flex gap-3 overflow-x-auto">
                     {item.gallery.map((g) =>
                       g.src ? (
                         <div
