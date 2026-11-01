@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { site } from "@/data/site";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+
+
+const body = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-face-body", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-face-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -83,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
+    <html lang="en" className={`${body.variable} ${mono.variable} h-full scroll-smooth antialiased`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script

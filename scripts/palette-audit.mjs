@@ -4,7 +4,9 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, extname } from "node:path";
 
 const ROOT = process.cwd();
-const SCAN_DIRS = ["src"];                       // add "app", "components" if your layout differs
+const args = process.argv.slice(2);
+const only = args.flatMap((a, i) => (a === "--only" && args[i + 1] ? [args[i + 1]] : []));
+const SCAN_DIRS = only.length ? only : ["src"];   // --only src/styles --only src/app/design
 const EXT = new Set([".ts", ".tsx", ".js", ".jsx", ".css", ".mjs", ".svg"]);
 const SKIP = new Set(["node_modules", ".next", ".git", "sanity"]); // sanity = CMS schema, not visual
 const ALLOWED_HEX = new Set(["#000", "#000000", "#e2e8f0", "#8b5cf6"]);
@@ -35,10 +37,12 @@ const hits = {};   // category -> [{file,line,text}]
 const add = (cat, file, line, text) => (hits[cat] ??= []).push({ file, line, text: text.trim().slice(0, 140) });
 
 for (const d of SCAN_DIRS) {
-  let base; try { base = join(ROOT, d); statSync(base); } catch { continue; }
-  for (const file of walk(base)) {
+  let base, st; try { base = join(ROOT, d); st = statSync(base); } catch { console.log(`  (skipping missing path: ${d})`); continue; }
+  for (const file of st.isFile() ? [base] : walk(base)) {
     const rel = relative(ROOT, file);
-    readFileSync(file, "utf8").split("\n").forEach((text, i) => {
+    const raw = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, " "));
+    raw.split("\n").forEach((text, i) => {
+      if (text.trim().startsWith("//")) return;
       for (const [cat, re] of RULES) if (re.test(text)) add(cat, rel, i + 1, text);
       for (const m of text.matchAll(/#[0-9a-fA-F]{3,8}\b/g)) {
         if (!ALLOWED_HEX.has(m[0].toLowerCase())) add("off-palette-hex", rel, i + 1, text);

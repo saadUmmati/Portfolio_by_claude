@@ -1,0 +1,82 @@
+/* ==========================================================================
+   DESIGN TOKENS  -- the ONLY place colour is defined.
+   Palette (3 colours, nothing else, ever):
+     #000000  black      #e2e8f0  slate-white      #8b5cf6  violet
+   Rules: no gradients, no opacity tints, no shadows, no blur, no blend modes.
+   ========================================================================== */
+
+/* ---- Light theme (also the :root default; <html class="dark"> switches) ---- */
+:root,
+.light {
+  --bg: #e2e8f0;
+  --ink: #000000;
+  --accent: #8b5cf6;       /* fills, borders, icons, LARGE text only on light */
+  --accent-text: #000000;  /* small accent text: violet on #e2e8f0 is only 3.43:1 */
+  --on-accent: #000000;    /* label colour on violet fills (4.96:1 in both themes) */
+}
+
+/* ---- Dark theme ---- */
+.dark {
+  --bg: #000000;
+  --ink: #e2e8f0;
+  --accent: #8b5cf6;
+  --accent-text: #8b5cf6;  /* violet on black is 4.96:1 -> fine for body text */
+  --on-accent: #000000;
+}
+
+/* ---- LEGACY ALIASES: keep the old components compiling during the rebuild.
+        DELETE this whole block at the end of Phase 2. ---- */
+:root,
+.light,
+.dark {
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --surface: var(--bg);
+  --surface-2: var(--bg);
+  --muted: var(--ink);
+  --accent-2: var(--accent);
+  --border: var(--ink);
+}
+
+/* ---- Tailwind colour utilities: bg-bg, text-ink, bg-accent, text-accent-text, text-on-accent ---- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+
+  /* LEGACY (delete in Phase 2) */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-surface: var(--bg);
+  --color-surface-2: var(--bg);
+  --color-muted: var(--ink);
+  --color-accent-2: var(--accent);
+  --color-border: var(--ink);
+
+  --font-sans: var(--font-face-body), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* ---- Type scale: text-display, text-h1, text-h2, text-body, text-label ---- */
+@theme {
+  --text-display: clamp(3.25rem, 8vw, 8.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.04em;
+
+  --text-h1: clamp(2.5rem, 5vw, 4.5rem);
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.75rem, 3vw, 2.75rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.08em;
+}

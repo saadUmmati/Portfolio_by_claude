@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "migrate-sanity": "tsx scripts/migrate-to-sanity.ts",
-    "audit:palette": "node scripts/palette-audit.mjs"
+    "audit:palette": "node scripts/palette-audit.mjs",
+    "check:contrast": "node scripts/contrast-check.mjs",
+    "audit:tokens": "node scripts/palette-audit.mjs --only src/styles --only src/app/design"
   },
   "dependencies": {
     "@portabletext/react": "^7.0.1",

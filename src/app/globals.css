@@ -1,40 +1,6 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --surface: #f4f4f6;
-  --surface-2: #e9e9ec;
-  --foreground: #0c0d0f;
-  --muted: #5b5c63;
-  --accent: #6d5bff; /* placeholder accent -- swap for your brand color later */
-  --accent-2: #22d3ee;
-  --border: #dcdce0;
-}
-
-.dark {
-  --background: #06070a;
-  --surface: #0e1015;
-  --surface-2: #15171d;
-  --foreground: #f4f4f5;
-  --muted: #93949c;
-  --accent: #7c6bff;
-  --accent-2: #22d3ee;
-  --border: #21232b;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-border: var(--border);
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial,
-    sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
 
 /* Hard safety net: nothing on this site should ever cause horizontal scroll, but a
    single wide/overflowing element anywhere is enough to create phantom empty space
