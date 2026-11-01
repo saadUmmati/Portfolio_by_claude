@@ -38,6 +38,11 @@
   --border: var(--ink);
 }
 
+/* ---- Remove Tailwind's default colour palette: any leftover bg-emerald-400 etc. now renders nothing ---- */
+@theme {
+  --color-*: initial;
+}
+
 /* ---- Tailwind colour utilities: bg-bg, text-ink, bg-accent, text-accent-text, text-on-accent ---- */
 @theme inline {
   --color-bg: var(--bg);
@@ -45,6 +50,9 @@
   --color-accent: var(--accent);
   --color-accent-text: var(--accent-text);
   --color-on-accent: var(--on-accent);
+  /* fixed (non-themed) palette colours: bg-black, bg-paper, text-paper */
+  --color-black: #000000;
+  --color-paper: #e2e8f0;
 
   /* LEGACY (delete in Phase 2) */
   --color-background: var(--bg);

@@ -19,13 +19,13 @@ export default function LinksPage() {
             src="/images/profile-image.jpg"
             alt={site.name}
             fill
-            sizes="80px"
-            unoptimized
+            sizes="192px"
+            quality={85}
             className="object-cover"
           />
         </div>
         <h1 className="mt-4 text-2xl font-semibold">{site.name}</h1>
-        <p className="mt-1 text-sm text-accent">{site.title}</p>
+        <p className="mt-1 text-sm text-accent-text">{site.title}</p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-muted">{linksPage.intro}</p>
       </div>
 
@@ -42,17 +42,10 @@ export default function LinksPage() {
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noreferrer" : undefined}
-                  className="group flex min-h-[44px] items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3.5 transition-colors hover:border-accent/60"
+                  className="group flex items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3.5 transition-colors hover:border-accent/60"
                 >
                   <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
-                      item.brandColor ? "" : "bg-surface-2 text-accent"
-                    }`}
-                    style={
-                      item.brandColor
-                        ? { backgroundColor: `${item.brandColor}1A`, color: item.brandColor }
-                        : undefined
-                    }
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-2 text-accent-text"
                   >
                     <item.Icon size={17} />
                   </span>
@@ -64,7 +57,7 @@ export default function LinksPage() {
                   </span>
                   <ArrowUpRight
                     size={16}
-                    className="shrink-0 text-muted transition-colors group-hover:text-accent"
+                    className="shrink-0 text-muted transition-colors group-hover:text-accent-text"
                   />
                 </a>
               ))}

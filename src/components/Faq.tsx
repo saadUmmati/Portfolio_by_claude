@@ -10,10 +10,9 @@ export default function Faq() {
   return (
     <section id="faq" className="scroll-mt-28 py-12 sm:py-16 md:py-20">
       <div className="relative overflow-hidden rounded-3xl border border-accent/15 py-14">
-        <div className="bg-grid pointer-events-none absolute inset-0 opacity-40" />
         <div className="container-page relative">
           <h2 className="text-center text-6xl font-black tracking-tight sm:text-8xl">
-            FAQs
+            FAQ&apos;S
           </h2>
 
           <div className="mx-auto mt-14 max-w-3xl">
@@ -23,7 +22,7 @@ export default function Faq() {
                 <div key={f.question} className="border-t border-border last:border-b">
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : i)}
-                    className="cursor-hover flex min-h-[44px] w-full items-center gap-4 py-5 text-left transition-colors hover:text-accent sm:gap-6"
+                    className="cursor-hover flex w-full items-center gap-4 py-5 text-left sm:gap-6"
                   >
                     <span className="font-mono text-xs text-muted">
                       {String(i + 1).padStart(2, "0")}

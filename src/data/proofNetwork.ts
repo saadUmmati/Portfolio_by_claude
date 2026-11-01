@@ -25,7 +25,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "cost",
     label: "Cost & Efficiency",
-    color: "#34d399",
+    color: "var(--accent)",
     labelX: 20,
     labelY: 40,
     nodes: [
@@ -38,7 +38,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "accuracy",
     label: "Accuracy & Quality",
-    color: "#fbbf24",
+    color: "var(--ink)",
     labelX: 50,
     labelY: 22,
     nodes: [
@@ -51,7 +51,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "scale",
     label: "Scale & Performance",
-    color: "#22d3ee",
+    color: "var(--accent)",
     labelX: 80,
     labelY: 40,
     nodes: [
@@ -66,7 +66,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "reliability",
     label: "Reliability & Ops",
-    color: "#a78bfa",
+    color: "var(--ink)",
     labelX: 84,
     labelY: 56,
     nodes: [
@@ -79,7 +79,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "reach",
     label: "Reach & Languages",
-    color: "#f472b6",
+    color: "var(--accent)",
     labelX: 62,
     labelY: 74,
     nodes: [
@@ -92,7 +92,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "research",
     label: "Certifications & Learning",
-    color: "#fb923c",
+    color: "var(--ink)",
     labelX: 34,
     labelY: 80,
     nodes: [
@@ -104,7 +104,7 @@ export const proofCategories: ProofCategory[] = [
   {
     id: "breadth",
     label: "Systems Breadth",
-    color: "#2dd4bf",
+    color: "var(--accent)",
     labelX: 10,
     labelY: 58,
     nodes: [

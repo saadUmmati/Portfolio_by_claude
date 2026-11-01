@@ -38,7 +38,7 @@ export default function BlogSummarizeButton({
       {!summary && !loading && (
         <button
           onClick={handleSummarize}
-          className="cursor-hover flex min-h-[44px] items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          className="cursor-hover flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent transition-opacity hover:opacity-90"
         >
           <Sparkles size={15} />
           Summarize with AI
@@ -46,13 +46,13 @@ export default function BlogSummarizeButton({
       )}
       {loading && (
         <div className="flex items-center gap-2 text-sm text-muted">
-          <Loader2 size={16} className="animate-spin text-accent" />
+          <Loader2 size={16} className="animate-spin text-accent-text" />
           Reading the post...
         </div>
       )}
       {summary && !loading && (
         <div>
-          <p className="flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase">
+          <p className="flex items-center gap-2 text-xs font-semibold tracking-widest text-accent-text uppercase">
             <Sparkles size={13} /> AI Summary
           </p>
           <div className="chat-markdown mt-3 text-sm leading-relaxed text-foreground/90">
@@ -60,7 +60,7 @@ export default function BlogSummarizeButton({
           </div>
           <button
             onClick={handleSummarize}
-            className="cursor-hover mt-4 flex min-h-[44px] items-center text-xs text-accent hover:underline py-1"
+            className="cursor-hover mt-4 text-xs text-accent-text hover:underline"
           >
             Regenerate
           </button>

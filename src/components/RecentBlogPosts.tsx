@@ -12,13 +12,13 @@ export default function RecentBlogPosts() {
         <div className="mb-10 flex items-end justify-between">
           <div>
             <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-              <span className="bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-400 bg-clip-text text-transparent">
+              <span className="text-accent-text">
                 Recent Blog Posts
               </span>
             </h2>
             <p className="mt-2 text-muted">Latest insights on AI, mobile, and software engineering</p>
           </div>
-          <Link href="/blog" className="cursor-hover hidden text-sm text-accent transition-colors hover:text-accent-2 md:block">
+          <Link href="/blog" className="hidden text-sm text-accent-text hover:underline md:block">
             View all posts →
           </Link>
         </div>
@@ -28,14 +28,14 @@ export default function RecentBlogPosts() {
             <Reveal key={post.slug} delay={i * 100}>
               <Link
                 href={`/blog/${post.slug}`}
-                className="cursor-hover group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
+                className="group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
               >
                 <div className="h-32 w-full overflow-hidden bg-surface-2">
                   <BlogHeaderArt slug={post.slug} className="h-full w-full" />
                 </div>
                 <div className="p-6">
                   <p className="text-xs text-muted">{post.date}</p>
-                  <h3 className="mt-2 font-semibold group-hover:text-accent">{post.title}</h3>
+                  <h3 className="mt-2 font-semibold group-hover:text-accent-text">{post.title}</h3>
                   <p className="mt-2 text-sm text-muted">{post.excerpt}</p>
                 </div>
               </Link>
@@ -43,7 +43,7 @@ export default function RecentBlogPosts() {
           ))}
         </div>
 
-        <Link href="/blog" className="cursor-hover mt-8 flex min-h-[44px] items-center text-sm text-accent transition-colors hover:text-accent-2 md:hidden">
+        <Link href="/blog" className="mt-8 block text-sm text-accent-text hover:underline md:hidden">
           View all posts →
         </Link>
       </div>

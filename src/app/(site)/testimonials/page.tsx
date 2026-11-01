@@ -28,7 +28,7 @@ export default function TestimonialsPage() {
                     {PlatformIcon && <PlatformIcon size={13} />}
                     {t.platform}
                   </span>
-                  <div className="flex text-amber-400">
+                  <div className="flex text-accent-text">
                     {Array.from({ length: 5 }).map((_, j) => (
                       <Star
                         key={j}

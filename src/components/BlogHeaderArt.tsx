@@ -48,21 +48,10 @@ export default function BlogHeaderArt({
       aria-hidden="true"
       role="presentation"
     >
-      <defs>
-        <linearGradient id={`bg-${slug}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="var(--accent-2)" stopOpacity="0.15" />
-        </linearGradient>
-        <linearGradient id={`line-${slug}`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#e879f9" />
-          <stop offset="50%" stopColor="var(--accent)" />
-          <stop offset="100%" stopColor="var(--accent-2)" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="220" fill={`url(#bg-${slug})`} />
+      <rect width="400" height="220" fill="var(--surface)" />
 
       {variant === "flow" && (
-        <g stroke={`url(#line-${slug})`} strokeWidth="2" fill="none" opacity="0.9">
+        <g stroke="var(--accent)" strokeWidth="2" fill="none" opacity="0.9">
           <path d="M-10 60 Q 100 20, 200 60 T 410 60" />
           <path d="M-10 110 Q 100 150, 200 110 T 410 110" opacity="0.6" />
           <path d="M-10 160 Q 100 130, 200 160 T 410 160" opacity="0.4" />
@@ -82,7 +71,7 @@ export default function BlogHeaderArt({
               <circle cx={x} cy={y} r="2.5" fill="var(--accent-2)" />
             </g>
           ))}
-          <g stroke="url(#line-${slug})" strokeWidth="1.5" opacity="0.7">
+          <g stroke="var(--accent)" strokeWidth="1.5" opacity="0.7">
             <line x1="80" y1="60" x2="200" y2="40" />
             <line x1="200" y1="40" x2="320" y2="70" />
             <line x1="80" y1="60" x2="200" y2="110" />
@@ -101,7 +90,7 @@ export default function BlogHeaderArt({
             <line key={y} x1="172" y1={y} x2={172 + 40 - i * 8} y2={y} stroke="var(--accent-2)" strokeWidth="2" />
           ))}
           <circle cx="200" cy="178" r="4" fill="var(--accent-2)" />
-          <path d="M40 190 L100 150 M300 150 L360 190" stroke="url(#line-${slug})" strokeWidth="2" opacity="0.6" />
+          <path d="M40 190 L100 150 M300 150 L360 190" stroke="var(--accent)" strokeWidth="2" opacity="0.6" />
         </g>
       )}
 
@@ -121,7 +110,7 @@ export default function BlogHeaderArt({
           ))}
           <path
             d="M40 170 L90 140 L140 120 L190 90 L240 70 L290 45 L340 25"
-            stroke={`url(#line-${slug})`}
+            stroke="var(--accent)"
             strokeWidth="2.5"
             fill="none"
           />

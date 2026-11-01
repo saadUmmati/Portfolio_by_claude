@@ -24,7 +24,6 @@ export default function ChatFab() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
-  const [isTouchInfo, setIsTouchInfo] = useState(false);
   // Only real mouse-driven devices get hover-to-open -- touch devices rely on
   // tap-to-toggle only. Mixing both on a touchscreen is what caused the
   // "hover doesn't work properly" issue: mobile browsers synthesize a hover-like
@@ -39,9 +38,8 @@ export default function ChatFab() {
           absolutely positioned so it never expands this hoverable area. */}
       <div
         className="fixed bottom-6 right-6 z-40 h-14 w-14"
-        onTouchStart={() => setIsTouchInfo(true)}
-        onMouseEnter={canHover && !isTouchInfo ? () => setOpen(true) : undefined}
-        onMouseLeave={canHover && !isTouchInfo ? () => setOpen(false) : undefined}
+        onMouseEnter={canHover ? () => setOpen(true) : undefined}
+        onMouseLeave={canHover ? () => setOpen(false) : undefined}
       >
         {/* Sub-options -- only mounted while open, so there's no DOM element for
             the browser to hit-test against when closed. */}
@@ -57,7 +55,7 @@ export default function ChatFab() {
               <span className="liquid-glass-light rounded-full px-3 py-1.5 text-xs font-medium whitespace-nowrap text-foreground/90 opacity-0 transition-opacity group-hover:opacity-100">
                 WhatsApp me directly
               </span>
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20 transition-transform hover:scale-105">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg shadow-black/20 transition-transform hover:scale-105">
                 <FaWhatsapp size={20} />
               </span>
             </a>
@@ -72,7 +70,7 @@ export default function ChatFab() {
               <span className="liquid-glass-light rounded-full px-3 py-1.5 text-xs font-medium whitespace-nowrap text-foreground/90 opacity-0 transition-opacity group-hover:opacity-100">
                 Ask my AI assistant
               </span>
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-black/20 transition-transform hover:scale-105">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg shadow-black/20 transition-transform hover:scale-105">
                 <Sparkles size={18} />
               </span>
             </button>
@@ -82,14 +80,10 @@ export default function ChatFab() {
         {/* Main toggle -- the only interaction on touch devices, and a fallback
             click-to-toggle on desktop too (in case hover was missed). */}
         <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            setOpen((o) => !o);
-          }}
+          onClick={() => setOpen((o) => !o)}
           aria-label="Contact options"
           aria-expanded={open}
-          className="cursor-hover flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-black/20 transition-transform hover:scale-105"
+          className="cursor-hover flex h-14 w-14 items-center justify-center rounded-full bg-accent text-on-accent shadow-lg shadow-black/20 transition-transform hover:scale-105"
         >
           {open ? <X size={22} /> : <MessageCircle size={22} />}
         </button>

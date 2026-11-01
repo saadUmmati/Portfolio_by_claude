@@ -33,6 +33,9 @@ const allNodes: (ProofNode & { color: string; catId: string })[] = proofCategori
   (cat) => cat.nodes.map((n) => ({ ...n, color: cat.color, catId: cat.id }))
 );
 
+// Category colours are palette tokens; accent text on the light theme needs the darker text token.
+const txt = (c: string) => (c === "var(--accent)" ? "var(--accent-text)" : c);
+
 export default function ProofNetwork() {
   const panelRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -105,15 +108,6 @@ export default function ProofNetwork() {
           ref={panelRef}
           className="relative mt-10 hidden h-[640px] w-full overflow-hidden rounded-3xl border border-accent/20 bg-surface/60 sm:block"
         >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                "radial-gradient(1px 1px at 20% 30%, white, transparent), radial-gradient(1px 1px at 60% 70%, white, transparent), radial-gradient(1px 1px at 80% 20%, white, transparent), radial-gradient(1px 1px at 35% 80%, white, transparent), radial-gradient(1px 1px at 90% 60%, white, transparent), radial-gradient(1px 1px at 10% 65%, white, transparent), radial-gradient(1px 1px at 50% 45%, white, transparent), radial-gradient(1px 1px at 25% 50%, white, transparent)",
-              backgroundSize: "100% 100%",
-            }}
-          />
-
           {size.width > 0 && (
             <svg className="pointer-events-none absolute inset-0 h-full w-full" width={size.width} height={size.height}>
               {linePoints.map((l) => (
@@ -145,9 +139,9 @@ export default function ProofNetwork() {
               style={{
                 left: `${cat.labelX}%`,
                 top: `${cat.labelY}%`,
-                color: cat.color,
-                borderColor: `${cat.color}55`,
-                backgroundColor: `${cat.color}14`,
+                color: txt(cat.color),
+                borderColor: cat.color,
+                backgroundColor: "var(--bg)",
               }}
             >
               {cat.label}
@@ -167,7 +161,6 @@ export default function ProofNetwork() {
                   width: n.size,
                   height: n.size,
                   backgroundColor: n.color,
-                  boxShadow: hovered === n.id ? `0 0 22px ${n.color}` : `0 0 8px ${n.color}88`,
                   transform: `translate(-50%, -50%) scale(${hovered === n.id ? 1.25 : 1})`,
                 }}
                 aria-label={`${n.value}: ${n.label}`}
@@ -211,7 +204,7 @@ export default function ProofNetwork() {
                   className="pointer-events-none absolute z-30 w-56 rounded-xl border border-border bg-background/95 p-3 text-xs shadow-xl backdrop-blur"
                   style={{ left, top: Math.max(MARGIN, top) }}
                 >
-                  <p className="font-semibold" style={{ color: hoveredNode.color }}>
+                  <p className="font-semibold" style={{ color: txt(hoveredNode.color) }}>
                     {hoveredNode.value}
                   </p>
                   <p className="mt-0.5 text-muted">{hoveredNode.label}</p>
@@ -221,7 +214,7 @@ export default function ProofNetwork() {
 
           <div className="absolute bottom-4 left-4 space-y-1 font-mono text-xs text-muted">
             <div className="flex items-center gap-2">
-              <span className="text-accent">PKT</span>
+              <span className="text-accent-text">PKT</span>
               {pktTime}
             </div>
             <div className="flex items-center gap-2">
@@ -237,9 +230,9 @@ export default function ProofNetwork() {
             <div
               key={cat.id}
               className="rounded-2xl border p-5"
-              style={{ borderColor: `${cat.color}33`, background: `linear-gradient(160deg, ${cat.color}0f, transparent 60%)` }}
+              style={{ borderColor: cat.color }}
             >
-              <p className="font-mono text-xs font-semibold tracking-wide uppercase" style={{ color: cat.color }}>
+              <p className="font-mono text-xs font-semibold tracking-wide uppercase" style={{ color: txt(cat.color) }}>
                 {cat.label}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -247,9 +240,9 @@ export default function ProofNetwork() {
                   <div
                     key={n.id}
                     className="rounded-lg border px-3 py-2 text-center"
-                    style={{ borderColor: `${cat.color}40`, backgroundColor: `${cat.color}12` }}
+                    style={{ borderColor: cat.color }}
                   >
-                    <span className="text-sm font-semibold" style={{ color: cat.color }}>
+                    <span className="text-sm font-semibold" style={{ color: txt(cat.color) }}>
                       {n.value}
                     </span>
                   </div>

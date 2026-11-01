@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           <Reveal key={p.slug} delay={(i % 3) * 80}>
             <Link
               href={`/projects/${p.slug}`}
-              className="cursor-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
             >
               <div className="relative h-44 w-full overflow-hidden bg-surface-2">
                 {p.image ? (
@@ -36,15 +36,14 @@ export default function ProjectsPage() {
                     alt={`Screenshot of ${p.title}, a ${p.category.toLowerCase()} project`}
                     fill
                     sizes="400px"
-                    unoptimized
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <div className={`h-full w-full bg-gradient-to-br ${p.gradient}`} />
+                  <div className={`h-full w-full bg-accent`} />
                 )}
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <span className="text-xs font-semibold tracking-wide text-accent">
+                <span className="text-xs font-semibold tracking-wide text-accent-text">
                   {p.category}
                 </span>
                 <h3 className="mt-2 font-semibold">{p.title}</h3>
@@ -59,7 +58,7 @@ export default function ProjectsPage() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-4 flex items-center gap-1 border-t border-border pt-4 text-sm text-accent">
+                <div className="mt-4 flex items-center gap-1 border-t border-border pt-4 text-sm text-accent-text">
                   View Project
                   <ArrowUpRight size={14} />
                 </div>
@@ -77,7 +76,7 @@ export default function ProjectsPage() {
           href={site.socials.github}
           target="_blank"
           rel="noreferrer"
-          className="cursor-hover mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-2 active:scale-95"
+          className="cursor-hover mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent-text hover:underline"
         >
           github.com/saadummati
           <ArrowUpRight size={14} />

@@ -43,8 +43,8 @@ export default function ScheduleEmbed() {
       <div className="flex h-[600px] flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-surface p-10 text-center">
         <p className="font-medium">Calendly not connected yet</p>
         <p className="mt-2 max-w-sm text-sm text-muted">
-          Add your Calendly link as <code className="text-accent">NEXT_PUBLIC_CALENDLY_URL</code> in{" "}
-          <code className="text-accent">.env.local</code> and this space will show your live
+          Add your Calendly link as <code className="text-accent-text">NEXT_PUBLIC_CALENDLY_URL</code> in{" "}
+          <code className="text-accent-text">.env.local</code> and this space will show your live
           booking calendar automatically.
         </p>
       </div>
@@ -63,7 +63,7 @@ export default function ScheduleEmbed() {
           href={CALENDLY_URL}
           target="_blank"
           rel="noreferrer"
-          className="cursor-hover mt-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
+          className="cursor-hover mt-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent hover:opacity-90"
         >
           Open booking calendar
         </a>
@@ -77,7 +77,7 @@ export default function ScheduleEmbed() {
           so this avoids a blank/broken-looking box while it initializes. */}
       {status === "loading" && (
         <div className="flex h-[650px] flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface sm:h-[700px]">
-          <Loader2 className="animate-spin text-accent" size={22} />
+          <Loader2 className="animate-spin text-accent-text" size={22} />
           <p className="text-sm text-muted">Loading available times...</p>
         </div>
       )}

@@ -1,0 +1,5 @@
+src/components/GlobalBackground.tsx
+src/components/HeroBackground.tsx
+src/components/GlowCursor.tsx
+src/components/NeuralCursor.tsx
+src/components/LiquidGlassFilter.tsx

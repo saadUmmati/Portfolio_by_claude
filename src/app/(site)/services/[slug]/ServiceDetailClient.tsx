@@ -15,7 +15,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
   return (
     <div className="container-page py-10 sm:py-12 md:py-16">
-      <Link href="/services" className="text-sm text-accent hover:underline">
+      <Link href="/services" className="text-sm text-accent-text hover:underline">
         ← Back to Services
       </Link>
 
@@ -48,13 +48,12 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                     src={service.gallery[slide].src!}
                     alt={service.gallery[slide].label}
                     fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    unoptimized
+                    sizes="(min-width: 768px) 800px, 100vw"
                     className="object-cover"
                     priority={slide === 0}
                   />
                 ) : (
-                  <div className="flex h-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-accent/25 via-surface to-accent-2/20 text-center">
+                  <div className="flex h-full flex-col items-center justify-center gap-3 bg-surface text-center">
                     <span className="text-5xl">{service.emoji}</span>
                     <span className="px-6 text-sm font-medium text-foreground/90">
                       {service.gallery[slide]?.label}
@@ -95,7 +94,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                       }`}
                     >
                       {g.src ? (
-                        <Image src={g.src} alt={g.label} fill sizes="150px" unoptimized className="object-cover" />
+                        <Image src={g.src} alt={g.label} fill sizes="150px" className="object-cover" />
                       ) : (
                         <span className="flex h-full items-center justify-center px-1 text-center text-xs text-muted">
                           {g.label}
@@ -114,7 +113,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             <ul className="mt-4 space-y-3">
               {service.whatsIncluded.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-muted">
-                  <Check size={16} className="mt-0.5 shrink-0 text-accent" />
+                  <Check size={16} className="mt-0.5 shrink-0 text-accent-text" />
                   {item}
                 </li>
               ))}
@@ -175,7 +174,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
           <Link
             href="/schedule"
-            className="cursor-hover mt-6 block rounded-full bg-accent px-4 py-3 text-center text-sm font-medium text-white transition-opacity hover:opacity-90"
+            className="cursor-hover mt-6 block rounded-full bg-accent px-4 py-3 text-center text-sm font-medium text-on-accent transition-opacity hover:opacity-90"
           >
             Book a Call
           </Link>

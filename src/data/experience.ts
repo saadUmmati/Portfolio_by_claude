@@ -8,7 +8,7 @@ export type ExperienceCategory =
 
 export interface GalleryImage {
   label: string;
-  src?: string; // real screenshot path -- falls back to a gradient placeholder tile if omitted
+  src?: string; // real screenshot path -- falls back to a flat placeholder tile if omitted
 }
 
 export interface ExperienceEntry {
@@ -24,7 +24,7 @@ export interface ExperienceEntry {
   tags: string[];
   categories: ExperienceCategory[];
   logoInitial: string; // fallback letter logo when logoSrc isn't set
-  logoColor: string; // background color for the letter/logo badge
+  logoColor?: string; // legacy (unused by the front end; badges use the accent token)
   gallery: GalleryImage[];
 }
 
@@ -43,7 +43,6 @@ export const experience: ExperienceEntry[] = [
     tags: ["AI Automation", "Workflow Automation", "AI Agents"],
     categories: ["AI", "Consultations"],
     logoInitial: "H",
-    logoColor: "#F97316",
     gallery: [
       { label: "Agent tool-calling diagram", src: "/images/gallery/agent-tool-calling-diagram.jpg" },
       { label: "n8n workflow diagram", src: "/images/gallery/n8n-workflow-diagram.jpg" },
@@ -55,8 +54,7 @@ export const experience: ExperienceEntry[] = [
     id: "cloudgate",
     company: "CloudGate Technologies",
     companyUrl: "https://www.cloudgatetechnologies.com",
-    logoSrc: "/images/cloudgate-logo.png",
-    logoBg: "dark",
+    logoSrc: "https://www.cloudgatetechnologies.com/assets/images/logo/logo2.png",
     location: "Onsite",
     role: "AI Systems Engineer",
     period: "March 2026 - July 2026",
@@ -65,7 +63,6 @@ export const experience: ExperienceEntry[] = [
     tags: ["On-Device AI", "ONNX", "Android", "Kotlin", "ARCore", "MVVM"],
     categories: ["AI", "Mobile Apps"],
     logoInitial: "C",
-    logoColor: "#6d5bff",
     gallery: [
       { label: "ClipGallery clustering UI", src: "/images/gallery/clipgallery-clustering-ui.jpg" },
       { label: "AR measurement prototype", src: "/images/gallery/ar-measurement-prototype.jpg" },
@@ -85,7 +82,6 @@ export const experience: ExperienceEntry[] = [
     tags: ["Leadership", "AI Agents", "Automation", "Operations"],
     categories: ["Consultations", "AI"],
     logoInitial: "S",
-    logoColor: "#7C3AED",
     logoBg: "dark",
     gallery: [
       { label: "Team workspace", src: "/images/gallery/team-workspace.jpg" },
@@ -105,7 +101,6 @@ export const experience: ExperienceEntry[] = [
     tags: ["LinkedIn", "Content Creation", "B2B Marketing"],
     categories: ["Content Creation"],
     logoInitial: "N",
-    logoColor: "#0EA5E9",
     gallery: [
       { label: "Campaign performance snapshot", src: "/images/gallery/campaign-performance-snapshot.jpg" },
       { label: "Published post example", src: "/images/gallery/published-post-example.jpg" },
@@ -125,7 +120,6 @@ export const experience: ExperienceEntry[] = [
     tags: ["Prompt Engineering", "LLMs", "Chatbots"],
     categories: ["AI", "ChatBots"],
     logoInitial: "O",
-    logoColor: "#22c55e",
     gallery: [
       { label: "Prompt engineering & fine-tuning workflow", src: "/images/gallery/llm-fine-tuning-prompt-engineering.jpg" },
       { label: "Chatbot conversation flow", src: "/images/gallery/chatbot-conversation-flow.jpg" },

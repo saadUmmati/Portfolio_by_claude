@@ -144,14 +144,14 @@ export const linksPage = {
       items: [
         { label: "Schedule a Call", description: "Book a 1-1 meeting", href: "/schedule", Icon: CalendarDays },
         { label: "Chat with my AI Assistant", description: "Instant answers, 24/7", href: "/chat", Icon: MessageCircle },
-        { label: "WhatsApp", description: "Message me directly", href: `https://wa.me/${site.whatsapp}`, Icon: FaWhatsapp, external: true, brandColor: "#25D366" },
+        { label: "WhatsApp", description: "Message me directly", href: `https://wa.me/${site.whatsapp}`, Icon: FaWhatsapp, external: true },
         { label: "Email", description: site.email, href: `mailto:${site.email}`, Icon: Mail },
       ] as QuickLink[],
     },
     {
       heading: "Follow",
       items: [
-        { label: "LinkedIn", description: "10,000+ followers", href: site.socials.linkedin, Icon: FaLinkedin, external: true, brandColor: "#0A66C2" },
+        { label: "LinkedIn", description: "10,000+ followers", href: site.socials.linkedin, Icon: FaLinkedin, external: true },
         { label: "GitHub", description: "Code & open-source work", href: site.socials.github, Icon: FaGithub, external: true },
       ] as QuickLink[],
     },

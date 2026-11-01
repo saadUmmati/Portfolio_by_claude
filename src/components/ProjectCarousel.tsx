@@ -34,7 +34,7 @@ export default function ProjectCarousel() {
     >
       <div
         key={project.title}
-        className={`animate-fade-up relative flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br sm:h-80 ${project.gradient}`}
+        className={`animate-fade-up relative flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-accent sm:h-80`}
       >
         {project.image ? (
           <Image
@@ -42,20 +42,18 @@ export default function ProjectCarousel() {
             alt={`Screenshot of ${project.title}, a ${project.category.toLowerCase()} project`}
             fill
             sizes="(min-width: 640px) 640px, 100vw"
-            unoptimized
             className="object-cover"
             priority={index === 0}
           />
         ) : (
-          <span className="text-2xl font-semibold text-white/90 drop-shadow sm:text-3xl">
+          <span className="text-2xl font-semibold text-on-accent sm:text-3xl">
             {project.title}
           </span>
         )}
-        <div className="absolute inset-0 bg-black/10" />
       </div>
 
       <div className="mt-4 flex items-center justify-between">
-        <span className="text-xs font-semibold tracking-wide text-accent">
+        <span className="text-xs font-semibold tracking-wide text-accent-text">
           {project.category}
         </span>
         <span className="text-sm text-muted">
@@ -66,13 +64,13 @@ export default function ProjectCarousel() {
       <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
       <p className="mt-1.5 text-base text-muted">{project.description}</p>
 
-      <div className="mt-4 flex items-center justify-between flex-wrap gap-2">
+      <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <a
             href={project.href}
             target="_blank"
             rel="noreferrer"
-            className="cursor-hover flex min-h-[44px] items-center gap-1 text-sm font-medium text-accent hover:underline py-2"
+            className="cursor-hover flex items-center gap-1 text-sm font-medium text-accent-text hover:underline"
           >
             View Project
             <ArrowUpRight size={15} />
@@ -82,7 +80,7 @@ export default function ProjectCarousel() {
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="cursor-hover flex min-h-[44px] items-center gap-1 text-sm font-medium text-muted hover:text-foreground hover:underline py-2"
+              className="cursor-hover flex items-center gap-1 text-sm font-medium text-muted hover:text-foreground hover:underline"
             >
               Live Demo
               <ArrowUpRight size={15} />
@@ -93,14 +91,14 @@ export default function ProjectCarousel() {
           <button
             aria-label="Previous project"
             onClick={prev}
-            className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
+            className="cursor-hover flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
           >
             <ChevronLeft size={16} />
           </button>
           <button
             aria-label="Next project"
             onClick={next}
-            className="cursor-hover flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
+            className="cursor-hover flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 hover:bg-surface-2"
           >
             <ChevronRight size={16} />
           </button>

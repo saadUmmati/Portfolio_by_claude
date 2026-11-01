@@ -17,13 +17,13 @@ export default function SchedulePage() {
     <>
       <div className="container-page py-10 sm:py-12 md:py-16">
         <span className="liquid-glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-muted">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+          <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
           {site.availability}
         </span>
 
         <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
           Schedule a{" "}
-          <span className="bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-400 bg-clip-text text-transparent">
+          <span className="text-accent-text">
             Meeting
           </span>
         </h1>
@@ -54,7 +54,7 @@ export default function SchedulePage() {
             <Reveal key={m.slug} delay={i * 60}>
               <Link
                 href={`/schedule/${m.slug}`}
-                className="cursor-hover group flex h-full flex-col rounded-2xl border border-accent/20 bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg active:scale-95"
+                className="cursor-hover group flex h-full flex-col rounded-2xl border border-accent/20 bg-surface p-6 transition-all hover:-translate-y-0.5 hover:border-accent/60"
               >
                 <span className="flex w-fit items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1 text-xs text-muted">
                   <Clock size={11} />
@@ -62,7 +62,7 @@ export default function SchedulePage() {
                 </span>
                 <h3 className="mt-3 font-semibold">{m.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted">{m.description}</p>
-                <span className="mt-4 flex items-center gap-1 text-sm font-medium text-accent">
+                <span className="mt-4 flex items-center gap-1 text-sm font-medium text-accent-text">
                   Schedule Now
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -78,7 +78,7 @@ export default function SchedulePage() {
             href={`https://wa.me/${site.whatsapp}`}
             target="_blank"
             rel="noreferrer"
-            className="cursor-hover text-accent transition-colors hover:text-accent-2"
+            className="cursor-hover text-accent-text hover:underline"
           >
             Message me directly
           </a>

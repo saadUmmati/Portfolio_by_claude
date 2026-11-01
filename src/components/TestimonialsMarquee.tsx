@@ -12,34 +12,34 @@ export default function TestimonialsMarquee() {
       <div className="container-page mb-10 flex items-end justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-            <span className="bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-400 bg-clip-text text-transparent">
+            <span className="text-accent-text">
               What People Say
             </span>
           </h2>
         </div>
-        <Link href="/testimonials" className="cursor-hover hidden text-sm text-accent transition-colors hover:text-accent-2 md:block">
+        <Link href="/testimonials" className="hidden text-sm text-accent-text hover:underline md:block">
           View All Testimonials →
         </Link>
       </div>
 
-      <div className="mask-fade-x marquee-row overflow-hidden py-4">
+      <div className="overflow-hidden">
         <div
-          className="marquee-track flex w-max min-w-max gap-6"
-          style={{ "--marquee-duration": "55s" } as React.CSSProperties}
+          className="flex w-max gap-6 py-2"
+          style={{ animation: "marquee 55s linear infinite" }}
         >
           {[...row, ...row].map((t, i) => {
             const PlatformIcon = platformIcons[t.platform];
             return (
               <div
                 key={i}
-                className="w-80 shrink-0 rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-2 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10 cursor-hover"
+                className="w-80 shrink-0 rounded-2xl border border-border bg-surface p-6"
               >
                 <div className="flex items-center justify-between">
                   <span className="flex items-center gap-1.5 text-xs text-muted">
                     {PlatformIcon && <PlatformIcon size={13} />}
                     {t.platform}
                   </span>
-                  <div className="flex text-amber-400">
+                  <div className="flex text-accent-text">
                     {Array.from({ length: 5 }).map((_, j) => (
                       <Star
                         key={j}
@@ -70,7 +70,7 @@ export default function TestimonialsMarquee() {
 
       <Link
         href="/testimonials"
-        className="cursor-hover container-page mt-6 flex min-h-[44px] items-center text-sm text-accent transition-colors hover:text-accent-2 md:hidden"
+        className="container-page mt-6 block text-sm text-accent-text hover:underline md:hidden"
       >
         View All Testimonials →
       </Link>

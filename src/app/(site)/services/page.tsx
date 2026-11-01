@@ -28,9 +28,9 @@ export default function ServicesPage() {
           <button
             key={c}
             onClick={() => setCategory(c)}
-            className={`cursor-hover flex min-h-[44px] items-center rounded-full border px-4 py-1.5 text-sm transition-all active:scale-95 ${
+            className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
               category === c
-                ? "border-accent bg-accent text-white"
+                ? "border-accent bg-accent text-on-accent"
                 : "border-border text-muted hover:bg-surface"
             }`}
           >
@@ -46,7 +46,7 @@ export default function ServicesPage() {
           <Reveal key={s.slug} delay={(i % 3) * 80}>
             <Link
               href={`/services/${s.slug}`}
-              className="cursor-hover flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/5"
+              className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/60"
             >
               {s.gallery[0]?.src ? (
                 <div className="relative h-32 overflow-hidden rounded-xl bg-surface-2">
@@ -55,7 +55,6 @@ export default function ServicesPage() {
                     alt={s.gallery[0].label}
                     fill
                     sizes="400px"
-                    unoptimized
                     className="object-cover"
                   />
                 </div>
@@ -84,7 +83,7 @@ export default function ServicesPage() {
                   <p className="text-xs text-muted">Pricing</p>
                   <p className="font-semibold">Custom Quote</p>
                 </div>
-                <span className="text-sm text-accent">View Details →</span>
+                <span className="text-sm text-accent-text">View Details →</span>
               </div>
             </Link>
           </Reveal>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 // --- Neural trail tuning ---
 interface TrailNode {
@@ -33,20 +33,10 @@ export default function CustomCursor() {
   const orbPos = useRef({ x: -100, y: -100 });
   const hovering = useRef(false);
 
-  const [mounted, setMounted] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!isTouch && !reducedMotion) {
-      setIsActive(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || !isActive) return;
+    if (isTouch || reducedMotion) return;
 
     document.documentElement.classList.add("custom-cursor-active");
 
@@ -54,7 +44,7 @@ export default function CustomCursor() {
     const ctx = canvas?.getContext("2d");
     const accent2 =
       getComputedStyle(document.documentElement).getPropertyValue("--accent-2").trim() ||
-      "#22d3ee";
+      "#8b5cf6";
 
     function resize() {
       if (!canvas) return;
@@ -137,20 +127,17 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", onMove);
       if (raf.current) cancelAnimationFrame(raf.current);
     };
-  }, [mounted, isActive]);
-
-  if (!mounted || !isActive) return null;
+  }, []);
 
   return (
     <>
-      <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[90]" aria-hidden="true" />
+      <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[9998]" aria-hidden="true" />
       <div
         ref={orbRef}
         aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-[95] rounded-full transition-[width,height,opacity] duration-200 ease-out"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full transition-[width,height,opacity] duration-200 ease-out"
         style={{
-          background: "radial-gradient(circle, var(--accent-2) 0%, var(--accent) 55%, transparent 75%)",
-          filter: "blur(3px)",
+          background: "var(--accent)",
         }}
       />
     </>

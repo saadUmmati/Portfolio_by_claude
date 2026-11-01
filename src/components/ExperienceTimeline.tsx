@@ -19,7 +19,7 @@ export default function ExperienceTimeline() {
       <div className="container-page">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-            <span className="bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-400 bg-clip-text text-transparent">
+            <span className="text-accent-text">
               Work Experience
             </span>
           </h2>
@@ -33,9 +33,9 @@ export default function ExperienceTimeline() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`cursor-hover flex min-h-[44px] items-center rounded-full border px-4 py-1.5 text-sm transition-all active:scale-95 ${
+              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                 filter === f
-                  ? "border-accent bg-accent text-white"
+                  ? "border-accent bg-accent text-on-accent"
                   : "border-border text-muted hover:bg-surface"
               }`}
             >
@@ -51,8 +51,7 @@ export default function ExperienceTimeline() {
             <Reveal key={item.id} delay={i * 100} className="relative flex gap-4 sm:gap-6">
               <div className="relative flex w-8 shrink-0 justify-center pt-2 sm:w-10">
                 <span
-                  className="h-3 w-3 rounded-full ring-4 ring-background"
-                  style={{ backgroundColor: item.logoColor }}
+                  className="h-3 w-3 rounded-full bg-accent ring-4 ring-background"
                 />
               </div>
 
@@ -62,7 +61,7 @@ export default function ExperienceTimeline() {
                     {item.logoSrc ? (
                       <div
                         className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full p-1.5 ring-1 ring-border ${
-                          item.logoBg === "dark" ? "bg-neutral-900" : "bg-white"
+                          item.logoBg === "dark" ? "bg-black" : "bg-paper"
                         }`}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element -- external company logo, avoids Next/Image remote-domain config */}
@@ -74,8 +73,7 @@ export default function ExperienceTimeline() {
                       </div>
                     ) : (
                       <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-                        style={{ backgroundColor: item.logoColor }}
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-on-accent"
                       >
                         {item.logoInitial}
                       </div>
@@ -91,7 +89,7 @@ export default function ExperienceTimeline() {
                       href={item.companyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="cursor-hover flex min-h-[44px] items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-all hover:bg-surface-2 active:scale-95"
+                      className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium hover:bg-surface-2"
                     >
                       Visit {item.company}
                       <ExternalLink size={12} />
@@ -100,7 +98,7 @@ export default function ExperienceTimeline() {
                 </div>
 
                 <p className="mt-4 font-semibold">{item.role}</p>
-                <p className="text-sm text-accent">{item.period}</p>
+                <p className="text-sm text-accent-text">{item.period}</p>
                 <p className="mt-2 text-sm text-muted">{item.description}</p>
 
                 {item.gallery.length > 0 && (
@@ -116,17 +114,13 @@ export default function ExperienceTimeline() {
                             alt={g.label}
                             fill
                             sizes="160px"
-                            unoptimized
                             className="object-cover"
                           />
                         </div>
                       ) : (
                         <div
                           key={g.label}
-                          className="flex h-20 w-32 shrink-0 items-center justify-center rounded-lg px-2 text-center text-[11px] font-medium text-white/90"
-                          style={{
-                            background: `linear-gradient(135deg, ${item.logoColor}55, ${item.logoColor}15)`,
-                          }}
+                          className="flex h-20 w-32 shrink-0 items-center justify-center rounded-lg border border-border bg-surface px-2 text-center text-[11px] font-medium text-foreground"
                         >
                           {g.label}
                         </div>

@@ -88,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${body.variable} ${mono.variable} h-full scroll-smooth antialiased`}>
+    <html lang="en" className={`${body.variable} ${mono.variable} h-full scroll-smooth antialiased suppressHydrationWarning`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
@@ -96,7 +96,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body id="top" className="min-h-full flex flex-col text-foreground font-sans">
+      <body id="top" className="min-h-full flex flex-col text-foreground font-sans suppressHydrationWarning">
         {children}
       </body>
     </html>

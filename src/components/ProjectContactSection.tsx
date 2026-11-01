@@ -36,7 +36,7 @@ export default function ProjectContactSection() {
     <section className="py-12 sm:py-16 md:py-20">
       <div className="container-page grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className="text-xs font-medium tracking-wide text-accent">/ OR, SEND DETAILS DIRECTLY</p>
+          <p className="text-xs font-medium tracking-wide text-accent-text">/ OR, SEND DETAILS DIRECTLY</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl">
             Prefer not to book a slot yet?
           </h2>
@@ -52,9 +52,9 @@ export default function ProjectContactSection() {
                 href={c.href}
                 target={c.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="flex min-h-[44px] items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/60"
+                className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/60"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent-text">
                   <c.Icon size={16} />
                 </span>
                 <span>
@@ -71,14 +71,14 @@ export default function ProjectContactSection() {
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-4 py-2.5">
             <div className="flex items-center gap-3">
               <span className="flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
+                <span className="h-2.5 w-2.5 rounded-full border border-ink" />
+                <span className="h-2.5 w-2.5 rounded-full border border-ink" />
+                <span className="h-2.5 w-2.5 rounded-full border border-ink" />
               </span>
               <span className="font-mono text-xs text-muted">new_message.tsx</span>
             </div>
             <span className="flex items-center gap-1.5 text-xs text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               online
             </span>
           </div>
@@ -97,7 +97,7 @@ export default function ProjectContactSection() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Jane Doe"
-                className="mt-1.5 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
               />
             </div>
             <div>
@@ -108,7 +108,7 @@ export default function ProjectContactSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="jane@company.com"
-                className="mt-1.5 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
+                className="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-accent"
               />
             </div>
             <div>
@@ -128,7 +128,7 @@ export default function ProjectContactSection() {
             </div>
             <button
               type="submit"
-              className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-on-accent transition-opacity hover:opacity-90"
             >
               Send message
               <Send size={15} />

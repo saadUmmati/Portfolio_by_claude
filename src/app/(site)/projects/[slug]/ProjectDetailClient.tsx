@@ -39,7 +39,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
   return (
     <div className="container-page py-10 sm:py-12 md:py-16">
-      <Link href="/projects" className="flex items-center gap-1.5 text-sm text-accent hover:underline">
+      <Link href="/projects" className="flex items-center gap-1.5 text-sm text-accent-text hover:underline">
         <ArrowLeft size={14} />
         Back to Projects
       </Link>
@@ -51,17 +51,16 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             alt={`Screenshot of ${project.title}, a ${project.category.toLowerCase()} project`}
             fill
             sizes="(min-width: 768px) 800px, 100vw"
-            unoptimized
             className="object-cover"
             priority
           />
         ) : (
-          <div className={`h-full w-full bg-gradient-to-br ${project.gradient}`} />
+          <div className={`h-full w-full bg-accent`} />
         )}
       </div>
 
       <div className="mt-6 flex items-center gap-3">
-        <span className="text-xs font-semibold tracking-wide text-accent">{project.category}</span>
+        <span className="text-xs font-semibold tracking-wide text-accent-text">{project.category}</span>
       </div>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">{project.title}</h1>
       <div className="mt-4 max-w-2xl space-y-3 text-lg text-muted">
@@ -105,7 +104,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           {project.gallery.map((g) => (
             <div key={g.label} className="overflow-hidden rounded-2xl border border-border bg-surface-2">
               <div className="relative h-48 w-full">
-                <Image src={g.src} alt={g.label} fill sizes="400px" unoptimized className="object-cover" />
+                <Image src={g.src} alt={g.label} fill sizes="400px" className="object-cover" />
               </div>
               <p className="p-3 text-xs text-muted">{g.label}</p>
             </div>
@@ -120,7 +119,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {project.roleHighlights.map((r) => (
               <div key={r.title} className="rounded-2xl border border-border bg-surface p-4">
-                <p className="text-sm font-semibold text-accent">{r.title}</p>
+                <p className="text-sm font-semibold text-accent-text">{r.title}</p>
                 <p className="mt-1.5 text-sm text-muted">{r.detail}</p>
               </div>
             ))}
@@ -134,11 +133,11 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         <p className="mt-1 text-sm text-muted">
           A representative snippet showing the core approach -- not the full source.
         </p>
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-[#0a0a0f] p-5">
+        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-surface p-5">
           <div className="mb-3 flex items-center gap-2 text-xs text-muted">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+            <span className="h-2.5 w-2.5 rounded-full border border-ink" />
+            <span className="h-2.5 w-2.5 rounded-full border border-ink" />
+            <span className="h-2.5 w-2.5 rounded-full border border-ink" />
             <span className="ml-2 font-mono">{project.codeSnippet.language}</span>
           </div>
           <pre className="font-mono text-[13px] leading-relaxed text-foreground/90">
@@ -152,7 +151,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         {!explanation && !loading && (
           <button
             onClick={handleExplain}
-            className="cursor-hover flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            className="cursor-hover flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent transition-opacity hover:opacity-90"
           >
             <Sparkles size={15} />
             Explain This Project
@@ -160,13 +159,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
         )}
         {loading && (
           <div className="flex items-center gap-2 text-sm text-muted">
-            <Loader2 size={16} className="animate-spin text-accent" />
+            <Loader2 size={16} className="animate-spin text-accent-text" />
             Looking at the code...
           </div>
         )}
         {explanation && !loading && (
           <div>
-            <p className="flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase">
+            <p className="flex items-center gap-2 text-xs font-semibold tracking-widest text-accent-text uppercase">
               <Sparkles size={13} /> AI Explanation
             </p>
             <div className="chat-markdown mt-3 text-sm leading-relaxed text-foreground/90">
@@ -174,7 +173,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             </div>
             <button
               onClick={handleExplain}
-              className="cursor-hover mt-4 text-xs text-accent hover:underline"
+              className="cursor-hover mt-4 text-xs text-accent-text hover:underline"
             >
               Regenerate
             </button>

@@ -8,7 +8,7 @@ export default function ChatPage() {
     <div className="container-page flex flex-col py-10 sm:py-12 md:py-16">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent-text">
             <Sparkles size={18} />
           </div>
           <div>
@@ -26,8 +26,8 @@ export default function ChatPage() {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted">
-          Powered by Gemini. Set <code className="text-accent">GEMINI_API_KEY</code> in{" "}
-          <code className="text-accent">.env.local</code> to enable live responses.
+          Powered by Gemini. Set <code className="text-accent-text">GEMINI_API_KEY</code> in{" "}
+          <code className="text-accent-text">.env.local</code> to enable live responses.
         </p>
       </div>
     </div>
