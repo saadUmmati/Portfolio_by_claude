@@ -46,7 +46,7 @@ for (const d of SCAN_DIRS) {
     raw.split("\n").forEach((text, i) => {
       if (text.trim().startsWith("//")) return;
       for (const [sev, cat, re] of RULES) if (re.test(text)) { SEV[cat] = sev; add(cat, rel, i + 1, text); }
-      for (const m of text.matchAll(/#[0-9a-fA-F]{3,8}\b/g)) {
+      for (const m of text.matchAll(/(?<!&)#[0-9a-fA-F]{3,8}\b/g)) {
         if (!ALLOWED_HEX.has(m[0].toLowerCase())) { SEV["off-palette-hex"] = "error"; add("off-palette-hex", rel, i + 1, text); }
       }
     });
