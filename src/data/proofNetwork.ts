@@ -83,7 +83,7 @@ export const proofCategories: ProofCategory[] = [
     labelX: 62,
     labelY: 74,
     nodes: [
-      { id: "reach-1", value: "10k+", label: "LinkedIn followers reached with AI & tech content", x: 52, y: 66, size: 24 },
+      { id: "reach-1", value: "12K+", label: "LinkedIn followers reached with AI & tech content", x: 52, y: 66, size: 24 },
       { id: "reach-2", value: "3+", label: "Countries with delivered client work", x: 66, y: 62, size: 18 },
       { id: "reach-3", value: "5+", label: "Industries served across projects", x: 58, y: 82, size: 22 },
       { id: "reach-4", value: "2", label: "Languages worked in professionally", x: 72, y: 84, size: 18 },

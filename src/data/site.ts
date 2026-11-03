@@ -26,8 +26,8 @@ export const site = {
   stats: [
     { label: "Projects Completed", target: 10, suffix: "+" },
     { label: "Success Rate", target: 98, suffix: "%" },
-    { label: "LinkedIn Followers", target: 10, suffix: "k+" },
-    { label: "Average Rating", target: 5, decimals: 1, suffix: " ★" },
+    { label: "LinkedIn Followers", target: 12, suffix: "K+" },
+    { label: "Average Rating", target: 4.96, decimals: 2, suffix: " ★" },
     { label: "Available", value: "24/7" }, // not a countable single number -- shown static
   ] as Stat[],
   about: {
@@ -47,7 +47,7 @@ I specialize in bringing machine learning on-device — real-time clustering, ON
       "AWS Certified DevOps Engineer – Professional (Certified)",
       "National Financial Literacy Program for Youth (NIBAF)",
       "Create a Website Using WordPress (Coursera)",
-      "Content Creation (LinkedIn, 10,000+ followers)",
+      "Content Creation (LinkedIn, 12,000+ followers)",
       "Mobile App Architecture",
       "API Development & Integration",
       "Team Leadership & Product Ownership",

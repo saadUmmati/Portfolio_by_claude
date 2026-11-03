@@ -131,8 +131,6 @@ export const experienceFilters: ("All" | ExperienceCategory)[] = [
   "All",
   "AI",
   "Mobile Apps",
-  "Websites",
-  "ChatBots",
   "Content Creation",
   "Consultations",
 ];

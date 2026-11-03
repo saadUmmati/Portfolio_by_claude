@@ -79,7 +79,7 @@ export const faqs = [
   {
     question: "Do you offer training or educational content creation services?",
     answer:
-      "Yes — alongside development, I create educational content on AI and tech (10,000+ LinkedIn followers) and I'm open to structured training or mentoring engagements for teams.",
+      "Yes — alongside development, I create educational content on AI and tech (12,000+ LinkedIn followers) and I'm open to structured training or mentoring engagements for teams.",
   },
   {
     question: "What payment systems and e-commerce solutions do you implement?",
@@ -151,7 +151,7 @@ export const linksPage = {
     {
       heading: "Follow",
       items: [
-        { label: "LinkedIn", description: "10,000+ followers", href: site.socials.linkedin, Icon: FaLinkedin, external: true },
+        { label: "LinkedIn", description: "12,000+ followers", href: site.socials.linkedin, Icon: FaLinkedin, external: true },
         { label: "GitHub", description: "Code & open-source work", href: site.socials.github, Icon: FaGithub, external: true },
       ] as QuickLink[],
     },

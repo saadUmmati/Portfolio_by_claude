@@ -80,6 +80,9 @@ export default function About() {
               >
                 Hire Now
               </a>
+              <Link href="/resume" target="_blank" className="cursor-hover border border-ink px-6 py-3 text-sm font-medium">
+                View Resume
+              </Link>
               <a
                 href={site.socials.linkedin}
                 target="_blank"

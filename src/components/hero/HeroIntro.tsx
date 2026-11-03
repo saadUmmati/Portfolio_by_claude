@@ -19,6 +19,9 @@ export default function HeroIntro() {
           >
             Get in Touch
           </a>
+          <Link href="/resume" target="_blank" className="cursor-hover border border-black px-6 py-3 text-sm font-medium">
+            View Resume
+          </Link>
         </div>
       </div>
     </section>
