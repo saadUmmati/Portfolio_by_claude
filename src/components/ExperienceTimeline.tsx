@@ -1,42 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { experience, experienceFilters, ExperienceCategory } from "@/data/experience";
 import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/kit/SectionHeader";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export default function ExperienceTimeline() {
   const [filter, setFilter] = useState<"All" | ExperienceCategory>("All");
+  const list = useRef<HTMLDivElement>(null);
+  const fill = useRef<HTMLDivElement>(null);
 
-  const items =
-    filter === "All"
-      ? experience
-      : experience.filter((e) => e.categories.includes(filter));
+  const items = filter === "All" ? experience : experience.filter((e) => e.categories.includes(filter));
+
+  // The violet line down the rail "draws" as you scroll through the list.
+  useGSAP(
+    () => {
+      const el = fill.current;
+      const l = list.current;
+      if (!el || !l) return;
+      if (prefersReducedMotion()) {
+        gsap.set(el, { scaleY: 1 });
+        return;
+      }
+      gsap.fromTo(
+        el,
+        { scaleY: 0 },
+        { scaleY: 1, ease: "none", scrollTrigger: { trigger: l, start: "top 65%", end: "bottom 65%", scrub: true } }
+      );
+    },
+    { scope: list, dependencies: [filter], revertOnUpdate: true }
+  );
 
   return (
-    <section id="experience" className="scroll-mt-28 py-12 sm:py-16 md:py-20">
+    <section id="experience" className="scroll-mt-28 border-t border-ink py-20 md:py-32">
       <div className="container-page">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-            <span className="text-accent-text">
-              Work Experience
-            </span>
-          </h2>
-          <p className="mt-3 text-muted">
-            My professional journey and the roles I&apos;ve held throughout my career
-          </p>
-        </div>
+        <SectionHeader
+          index="04"
+          label="Experience"
+          title="Where I’ve worked"
+          intro="My professional journey and the roles I’ve held throughout my career."
+        />
 
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
+        <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter experience">
           {experienceFilters.map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-                filter === f
-                  ? "border-accent bg-accent text-on-accent"
-                  : "border-border text-muted hover:bg-surface"
+              aria-pressed={filter === f}
+              className={`cursor-hover border px-4 py-2 font-mono text-label uppercase transition-colors ${
+                filter === f ? "border-accent bg-accent text-on-accent" : "border-ink hover:bg-ink hover:text-bg"
               }`}
             >
               {f}
@@ -44,104 +60,95 @@ export default function ExperienceTimeline() {
           ))}
         </div>
 
-        <div className="relative mt-14 space-y-8">
-          <div className="absolute top-2 bottom-2 left-4 w-px bg-border sm:left-5" />
+        <div ref={list} className="relative mt-14">
+          <div aria-hidden="true" className="absolute top-0 bottom-0 left-[11px] w-px bg-ink md:left-[calc(10rem+11px)]">
+            <div ref={fill} className="absolute inset-y-0 -left-px w-[3px] origin-top bg-accent" />
+          </div>
 
-          {items.map((item, i) => (
-            <Reveal key={item.id} delay={i * 100} className="relative flex gap-4 sm:gap-6">
-              <div className="relative flex w-8 shrink-0 justify-center pt-2 sm:w-10">
-                <span
-                  className="h-3 w-3 rounded-full bg-accent ring-4 ring-background"
-                />
-              </div>
+          <div className="space-y-10">
+            {items.map((item, i) => (
+              <Reveal key={item.id} delay={i * 80} className="grid grid-cols-[24px_1fr] md:grid-cols-[10rem_24px_1fr]">
+                <p className="hidden pr-6 pt-7 text-right font-mono text-label uppercase md:block">{item.period}</p>
 
-              <div className="flex-1 rounded-2xl border border-border bg-surface p-6">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    {item.logoSrc ? (
-                      <div
-                        className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full p-1.5 ring-1 ring-border ${
-                          item.logoBg === "dark" ? "bg-black" : "bg-paper"
-                        }`}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element -- external company logo, avoids Next/Image remote-domain config */}
-                        <img
-                          src={item.logoSrc}
-                          alt={`${item.company} logo`}
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                    ) : (
-                      <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-on-accent"
-                      >
-                        {item.logoInitial}
-                      </div>
-                    )}
-                    <div>
-                      <h3 className="font-semibold">{item.company}</h3>
-                      <p className="text-xs text-muted">{item.location}</p>
-                    </div>
-                  </div>
-
-                  {item.companyUrl && (
-                    <a
-                      href={item.companyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium hover:bg-surface-2"
-                    >
-                      Visit {item.company}
-                      <ExternalLink size={12} />
-                    </a>
-                  )}
+                <div className="flex justify-center pt-8">
+                  <span className="block h-[13px] w-[13px] bg-accent" />
                 </div>
 
-                <p className="mt-4 font-semibold">{item.role}</p>
-                <p className="text-sm text-accent-text">{item.period}</p>
-                <p className="mt-2 text-sm text-muted">{item.description}</p>
-
-                {item.gallery.length > 0 && (
-                  <div data-lenis-prevent className="mt-4 flex gap-3 overflow-x-auto">
-                    {item.gallery.map((g) =>
-                      g.src ? (
+                <div className="ml-5 border border-ink bg-bg p-6 md:p-8">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      {item.logoSrc ? (
                         <div
-                          key={g.label}
-                          className="relative h-24 w-40 shrink-0 overflow-hidden rounded-lg border border-border"
+                          className={`flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden border border-ink p-1.5 ${
+                            item.logoBg === "dark" ? "bg-black" : "bg-paper"
+                          }`}
                         >
-                          <Image
-                            src={g.src}
-                            alt={g.label}
-                            fill
-                            sizes="160px"
-                            className="object-cover"
-                          />
+                          {/* eslint-disable-next-line @next/next/no-img-element -- external company logo, avoids Next/Image remote-domain config */}
+                          <img src={item.logoSrc} alt={`${item.company} logo`} className="h-full w-full object-contain" />
                         </div>
                       ) : (
-                        <div
-                          key={g.label}
-                          className="flex h-20 w-32 shrink-0 items-center justify-center rounded-lg border border-border bg-surface px-2 text-center text-[11px] font-medium text-foreground"
-                        >
-                          {g.label}
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-accent font-mono text-sm font-semibold text-on-accent">
+                          {item.logoInitial}
                         </div>
-                      )
+                      )}
+                      <div>
+                        <h3 className="text-lg font-semibold">{item.company}</h3>
+                        <p className="font-mono text-label uppercase">{item.location}</p>
+                      </div>
+                    </div>
+
+                    {item.companyUrl && (
+                      <a
+                        href={item.companyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="cursor-hover font-mono text-label uppercase underline underline-offset-4"
+                      >
+                        Visit {item.company} &#8599;
+                      </a>
                     )}
                   </div>
-                )}
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {item.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-surface-2 px-3 py-1 text-xs text-muted"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  <p className="mt-6 text-xl font-semibold">{item.role}</p>
+                  <p className="mt-1 font-mono text-label text-accent-text uppercase md:hidden">{item.period}</p>
+                  <p className="mt-3 max-w-3xl text-[15px] leading-relaxed">{item.description}</p>
+
+                  {item.gallery.length > 0 && (
+                    <div data-lenis-prevent className="mt-6 flex gap-3 overflow-x-auto [scrollbar-width:none]">
+                      {item.gallery.map((g) =>
+                        g.src ? (
+                          <div key={g.label} className="group relative h-24 w-40 shrink-0 overflow-hidden border border-ink">
+                            <Image
+                              src={g.src}
+                              alt={g.label}
+                              fill
+                              sizes="160px"
+                              className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
+                            />
+                          </div>
+                        ) : (
+                          <div
+                            key={g.label}
+                            className="flex h-24 w-40 shrink-0 items-center justify-center border border-ink px-2 text-center font-mono text-[11px] uppercase"
+                          >
+                            {g.label}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {item.tags.map((t) => (
+                      <li key={t} className="border border-ink px-2.5 py-1 font-mono text-[11px] uppercase">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

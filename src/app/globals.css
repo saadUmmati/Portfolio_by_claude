@@ -170,3 +170,13 @@ html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Marquees: reduced motion shows a static, wrapped grid ---------- */
+html[data-motion="reduced"] .marquee-track {
+  width: auto;
+  flex-wrap: wrap;
+  transform: none !important;
+}
+html[data-motion="reduced"] .marquee-track [data-dup] {
+  display: none;
+}

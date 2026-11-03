@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { proofCategories, ProofNode } from "@/data/proofNetwork";
+import SectionHeader from "@/components/kit/SectionHeader";
 
 function useClock(timeZone: string) {
   const [time, setTime] = useState("--:--:--");
@@ -93,20 +94,21 @@ export default function ProofNetwork() {
   const hoveredNode = allNodes.find((n) => n.id === hovered);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20">
+    <section className="border-t border-ink py-20 md:py-32">
       <div className="container-page">
-        <h2 className="text-4xl font-bold tracking-tight md:text-6xl">Proof, not promises.</h2>
-        <p className="mt-3 max-w-lg text-muted">
-          Hover a point — every number here is a real, delivered result, not a
-          projection.
-        </p>
+        <SectionHeader
+          index="03"
+          label="Proof"
+          title="Proof, not promises."
+          intro="Hover a point — every number here is a real, delivered result, not a projection."
+        />
 
         {/* Scatter network -- tablet and up. Falls back to a simpler stacked list on
             phones, where a wide network diagram can't read well at any coordinate
             precision. */}
         <div
           ref={panelRef}
-          className="relative mt-10 hidden h-[640px] w-full overflow-hidden rounded-3xl border border-accent/20 bg-surface/60 sm:block"
+          className="relative mt-14 hidden h-[640px] w-full overflow-hidden border border-ink bg-bg sm:block"
         >
           {size.width > 0 && (
             <svg className="pointer-events-none absolute inset-0 h-full w-full" width={size.width} height={size.height}>
@@ -117,15 +119,15 @@ export default function ProofNetwork() {
                   y1={l.a.y}
                   x2={l.b.x}
                   y2={l.b.y}
-                  stroke={l.color}
-                  strokeOpacity={hovered && hovered !== l.id ? 0.08 : 0.28}
-                  strokeWidth={1}
+                  stroke={hovered === l.id ? "var(--accent)" : l.color}
+                  strokeDasharray={hovered === l.id ? undefined : "2 5"}
+                  strokeWidth={hovered === l.id ? 2 : 1}
                 />
               ))}
             </svg>
           )}
 
-          <p className="pointer-events-none absolute top-[46%] left-1/2 w-64 -translate-x-1/2 text-center font-mono text-xs text-muted/70">
+          <p className="pointer-events-none absolute top-[46%] left-1/2 w-64 -translate-x-1/2 text-center font-mono text-xs uppercase text-muted">
             hover a point — every number is delivered, not projected.
           </p>
 
@@ -135,7 +137,7 @@ export default function ProofNetwork() {
               ref={(el) => {
                 if (el) labelRefs.current.set(cat.id, el);
               }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-2.5 py-1 font-mono text-[11px] font-semibold tracking-wide whitespace-nowrap uppercase"
+              className="absolute -translate-x-1/2 -translate-y-1/2 border px-2.5 py-1 font-mono text-[11px] font-semibold tracking-wide whitespace-nowrap uppercase"
               style={{
                 left: `${cat.labelX}%`,
                 top: `${cat.labelY}%`,
@@ -156,17 +158,17 @@ export default function ProofNetwork() {
                 }}
                 onMouseEnter={() => setHovered(n.id)}
                 onMouseLeave={() => setHovered((h) => (h === n.id ? null : h))}
-                className="cursor-hover -translate-x-1/2 -translate-y-1/2 rounded-full transition-transform"
+                className="cursor-hover -translate-x-1/2 -translate-y-1/2 transition-transform"
                 style={{
                   width: n.size,
                   height: n.size,
-                  backgroundColor: n.color,
+                  backgroundColor: hovered === n.id ? "var(--accent)" : n.color,
                   transform: `translate(-50%, -50%) scale(${hovered === n.id ? 1.25 : 1})`,
                 }}
                 aria-label={`${n.value}: ${n.label}`}
               />
               <span
-                className="pointer-events-none absolute left-1/2 -translate-x-1/2 text-xs font-medium whitespace-nowrap text-foreground/80"
+                className="pointer-events-none absolute left-1/2 -translate-x-1/2 font-mono text-xs font-medium whitespace-nowrap text-foreground"
                 style={{ top: n.size / 2 + 6 }}
               >
                 {n.value}
@@ -201,7 +203,7 @@ export default function ProofNetwork() {
 
               return (
                 <div
-                  className="pointer-events-none absolute z-30 w-56 rounded-xl border border-border bg-background/95 p-3 text-xs shadow-xl backdrop-blur"
+                  className="pointer-events-none absolute isolate z-30 w-56 border border-ink bg-bg p-3 text-xs before:absolute before:inset-0 before:-z-10 before:translate-x-1.5 before:translate-y-1.5 before:bg-accent"
                   style={{ left, top: Math.max(MARGIN, top) }}
                 >
                   <p className="font-semibold" style={{ color: txt(hoveredNode.color) }}>
@@ -218,7 +220,7 @@ export default function ProofNetwork() {
               {pktTime}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-accent-2">EST</span>
+              <span className="text-accent-text">EST</span>
               {nyTime}
             </div>
           </div>
@@ -229,7 +231,7 @@ export default function ProofNetwork() {
           {proofCategories.map((cat) => (
             <div
               key={cat.id}
-              className="rounded-2xl border p-5"
+              className="border p-5"
               style={{ borderColor: cat.color }}
             >
               <p className="font-mono text-xs font-semibold tracking-wide uppercase" style={{ color: txt(cat.color) }}>
@@ -239,7 +241,7 @@ export default function ProofNetwork() {
                 {cat.nodes.map((n) => (
                   <div
                     key={n.id}
-                    className="rounded-lg border px-3 py-2 text-center"
+                    className="border px-3 py-2 text-center"
                     style={{ borderColor: cat.color }}
                   >
                     <span className="text-sm font-semibold" style={{ color: txt(cat.color) }}>

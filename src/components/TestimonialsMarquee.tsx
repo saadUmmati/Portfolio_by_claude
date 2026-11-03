@@ -1,79 +1,72 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import { testimonials, platformIcons, Testimonial } from "@/data/testimonials";
+import { testimonials, platformIcons } from "@/data/testimonials";
+import SectionHeader from "@/components/kit/SectionHeader";
+import { useVelocityMarquee } from "@/lib/useVelocityMarquee";
 
-const REPEATS = 3;
+// Two copies of the row make a seamless loop; each copy repeats the quotes twice so it is wider than any screen.
+const REPEATS = 2;
+const DURATIONS = [75];
 
 export default function TestimonialsMarquee() {
-  const row: Testimonial[] = Array(REPEATS).fill(testimonials).flat();
+  const root = useRef<HTMLElement>(null);
+  useVelocityMarquee(root, DURATIONS);
+  const half = Array(REPEATS).fill(testimonials).flat() as typeof testimonials;
 
   return (
-    <section className="py-12 sm:py-16 md:py-20">
-      <div className="container-page mb-10 flex items-end justify-between">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-            <span className="text-accent-text">
-              What People Say
-            </span>
-          </h2>
-        </div>
-        <Link href="/testimonials" className="hidden text-sm text-accent-text hover:underline md:block">
-          View All Testimonials →
+    <section ref={root} className="border-t border-ink py-20 md:py-32">
+      <div className="container-page mb-14 flex items-end justify-between gap-8">
+        <SectionHeader index="07" label="Testimonials" title="What people say" />
+        <Link href="/testimonials" className="cursor-hover hidden shrink-0 font-mono text-label uppercase underline underline-offset-4 md:block">
+          All testimonials &#8594;
         </Link>
       </div>
 
-      <div className="overflow-hidden">
-        <div
-          className="flex w-max gap-6 py-2"
-          style={{ animation: "marquee 55s linear infinite" }}
-        >
-          {[...row, ...row].map((t, i) => {
-            const PlatformIcon = platformIcons[t.platform];
-            return (
-              <div
-                key={i}
-                className="w-80 shrink-0 rounded-2xl border border-border bg-surface p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-xs text-muted">
-                    {PlatformIcon && <PlatformIcon size={13} />}
-                    {t.platform}
-                  </span>
-                  <div className="flex text-accent-text">
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <Star
-                        key={j}
-                        size={14}
-                        fill={j < t.rating ? "currentColor" : "none"}
-                        strokeWidth={j < t.rating ? 0 : 1.5}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <p className="mt-3 text-sm text-muted">&ldquo;{t.quote}&rdquo;</p>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-2 text-xs font-semibold">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <span className="block text-sm font-medium">{t.name}</span>
-                    <span className="block text-xs text-muted">
-                      {t.role}, {t.company}
+      <div className="overflow-hidden border-y border-ink">
+        <div data-track className="marquee-track flex w-max">
+          {[0, 1].map((copy) =>
+            half.map((t, i) => {
+              const PlatformIcon = platformIcons[t.platform];
+              const dup = copy === 1 || i >= testimonials.length;
+              return (
+                <figure
+                  key={`${copy}-${i}`}
+                  aria-hidden={dup || undefined}
+                  data-dup={dup ? "" : undefined}
+                  className="flex w-[22rem] shrink-0 flex-col justify-between gap-6 border-r border-ink p-7"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-1.5 font-mono text-label uppercase">
+                      {PlatformIcon && <PlatformIcon size={13} />}
+                      {t.platform}
                     </span>
+                    <div className="flex text-accent-text" aria-label={`${t.rating} out of 5 stars`}>
+                      {Array.from({ length: 5 }).map((_, j) => (
+                        <Star key={j} size={14} fill={j < t.rating ? "currentColor" : "none"} strokeWidth={j < t.rating ? 0 : 1.5} />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                  <blockquote className="text-[15px] leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
+                  <figcaption className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-ink font-mono text-xs">
+                      {t.initials}
+                    </span>
+                    <span>
+                      <span className="block text-sm font-medium">{t.name}</span>
+                      <span className="block font-mono text-[11px] uppercase">
+                        {t.role}, {t.company}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
+              );
+            })
+          )}
         </div>
       </div>
-
-      <Link
-        href="/testimonials"
-        className="container-page mt-6 block text-sm text-accent-text hover:underline md:hidden"
-      >
-        View All Testimonials →
-      </Link>
     </section>
   );
 }

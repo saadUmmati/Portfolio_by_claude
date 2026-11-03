@@ -2,49 +2,51 @@ import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 import Reveal from "@/components/Reveal";
 import BlogHeaderArt from "@/components/BlogHeaderArt";
+import SectionHeader from "@/components/kit/SectionHeader";
 
 export default function RecentBlogPosts() {
   const recent = blogPosts.slice(0, 3);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20">
+    <section className="border-t border-ink py-20 md:py-32">
       <div className="container-page">
-        <div className="mb-10 flex items-end justify-between">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-              <span className="text-accent-text">
-                Recent Blog Posts
-              </span>
-            </h2>
-            <p className="mt-2 text-muted">Latest insights on AI, mobile, and software engineering</p>
-          </div>
-          <Link href="/blog" className="hidden text-sm text-accent-text hover:underline md:block">
-            View all posts →
+        <div className="flex items-end justify-between gap-8">
+          <SectionHeader
+            index="06"
+            label="Journal"
+            title="Recent writing"
+            intro="Latest insights on AI, mobile, and software engineering."
+          />
+          <Link href="/blog" className="cursor-hover hidden shrink-0 font-mono text-label uppercase underline underline-offset-4 md:block">
+            All posts &#8594;
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid border-ink md:grid-cols-3 md:border-r [&>*]:border-b [&>*]:border-l [&>*]:border-ink">
           {recent.map((post, i) => (
-            <Reveal key={post.slug} delay={i * 100}>
+            <Reveal key={post.slug} delay={i * 100} className="h-full">
               <Link
                 href={`/blog/${post.slug}`}
-                className="group block h-full overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
+                className="cursor-hover group flex h-full flex-col transition-colors hover:bg-accent hover:text-on-accent"
               >
-                <div className="h-32 w-full overflow-hidden bg-surface-2">
+                <div className="h-36 w-full overflow-hidden border-b border-ink">
                   <BlogHeaderArt slug={post.slug} className="h-full w-full" />
                 </div>
-                <div className="p-6">
-                  <p className="text-xs text-muted">{post.date}</p>
-                  <h3 className="mt-2 font-semibold group-hover:text-accent-text">{post.title}</h3>
-                  <p className="mt-2 text-sm text-muted">{post.excerpt}</p>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="font-mono text-label uppercase">
+                    {String(i + 1).padStart(2, "0")} / {post.date}
+                  </p>
+                  <h3 className="mt-4 text-xl leading-snug font-semibold">{post.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed">{post.excerpt}</p>
+                  <span className="mt-auto pt-6 font-mono text-label uppercase underline underline-offset-4">Read &#8594;</span>
                 </div>
               </Link>
             </Reveal>
           ))}
         </div>
 
-        <Link href="/blog" className="mt-8 block text-sm text-accent-text hover:underline md:hidden">
-          View all posts →
+        <Link href="/blog" className="mt-8 block font-mono text-label uppercase underline underline-offset-4 md:hidden">
+          All posts &#8594;
         </Link>
       </div>
     </section>

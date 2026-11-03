@@ -1,60 +1,58 @@
+"use client";
+
+import { useRef } from "react";
 import { techIconRows } from "@/data/techIcons";
+import SectionHeader from "@/components/kit/SectionHeader";
+import { useVelocityMarquee } from "@/lib/useVelocityMarquee";
 
-// Repeat each row enough times that its total width comfortably exceeds any
-// viewport (even ultra-wide desktops), so the -50% loop never shows a gap.
-const REPEATS = 5;
-
-// Each row scrolls at its own (slow) relative speed, alternating direction.
-const ROW_DURATIONS = [150, 180]; // seconds -- higher = slower
+// Two copies of each row are enough for a seamless loop (it travels exactly one copy).
+// Each copy repeats the row twice so one copy is always wider than any screen.
+const REPEATS = 2;
+const DURATIONS = [90, 110]; // seconds per loop -- higher = slower
 
 export default function TechMarquee() {
+  const root = useRef<HTMLElement>(null);
+
+  useVelocityMarquee(root, DURATIONS);
+
   return (
-    <section className="py-12 sm:py-16 md:py-20">
-      <div className="container-page mb-12 text-center">
-        <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-          Expertise Across
-          <br />
-          <span className="text-accent-text">
-            Modern AI Technologies
-          </span>
-          <br />
-          <span className="inline-flex items-center gap-3">
-            <span aria-hidden>🧠</span> &amp; Frameworks
-          </span>
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-muted">
-          Building on-device AI, LLM agents, and automation systems with tools across
-          machine learning, generative AI, mobile, and web technologies
-        </p>
+    <section ref={root} className="border-t border-ink py-20 md:py-32">
+      <div className="container-page mb-14">
+        <SectionHeader
+          index="05"
+          label="Stack"
+          title="Tools I build with"
+          intro="On-device AI, LLM agents and automation, across machine learning, generative AI, mobile and web."
+        />
       </div>
 
-      <div className="flex flex-col gap-6">
+      {/* Screen readers and search engines get a plain list; the animated rows are decorative. */}
+      <ul className="sr-only">
+        {techIconRows.flat().map((t) => (
+          <li key={t.label}>{t.label}</li>
+        ))}
+      </ul>
+
+      <div aria-hidden="true" className="border-y border-ink">
         {techIconRows.map((row, i) => {
-          const longRow = Array(REPEATS).fill(row).flat();
-          const duration = ROW_DURATIONS[i % ROW_DURATIONS.length];
-          const reverse = i % 2 === 1;
+          const half = Array(REPEATS).fill(row).flat() as typeof row;
           return (
-            <div key={i} className="marquee-row overflow-x-hidden overflow-y-visible py-6">
-              <div
-                className="marquee-track flex w-max gap-6"
-                style={
-                  {
-                    "--marquee-duration": `${duration}s`,
-                    "--marquee-direction": reverse ? "reverse" : "normal",
-                  } as React.CSSProperties
-                }
-              >
-                {[...longRow, ...longRow].map((item, j) => (
-                  <div
-                    key={`${item.label}-${j}`}
-                    className="group relative flex h-32 w-32 shrink-0 items-center justify-center rounded-2xl border border-border bg-surface transition-transform duration-300 hover:z-10 hover:scale-125 hover:border-accent"
-                  >
-                    <item.Icon size={56} color={item.color} />
-                    <span className="pointer-events-none absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium whitespace-nowrap text-foreground opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100">
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
+            <div key={i} className="tech-row overflow-hidden border-ink [&:not(:last-child)]:border-b">
+              <div data-track className="marquee-track flex w-max">
+                {[0, 1].map((copy) =>
+                  half.map((item, j) => (
+                    <div
+                      key={`${copy}-${item.label}-${j}`}
+                      data-dup={copy === 1 || j >= row.length ? "" : undefined}
+                      className="group flex h-36 w-36 shrink-0 flex-col items-center justify-center gap-4 border-r border-ink transition-colors duration-200 hover:bg-accent hover:text-on-accent"
+                    >
+                      <item.Icon size={40} />
+                      <span className="px-2 text-center font-mono text-[10px] leading-tight tracking-[0.06em] uppercase">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           );
