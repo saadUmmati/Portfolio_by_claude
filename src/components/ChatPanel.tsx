@@ -3,7 +3,7 @@
 import { X, Sparkles } from "lucide-react";
 import ChatWidget from "@/components/ChatWidget";
 
-export default function ChatPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function ChatPanel({ open, onClose, initialPrompt }: { open: boolean; onClose: () => void; initialPrompt?: string }) {
   if (!open) return null;
 
   return (
@@ -35,7 +35,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
         </div>
 
         <div className="min-h-0 flex-1">
-          <ChatWidget autoFocus />
+          <ChatWidget autoFocus initialPrompt={initialPrompt} />
         </div>
       </div>
     </div>

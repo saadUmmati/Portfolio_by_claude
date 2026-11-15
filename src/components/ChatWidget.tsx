@@ -16,7 +16,7 @@ const STARTER_PROMPTS = [
   "Are you available for full-time roles?",
 ];
 
-export default function ChatWidget({ autoFocus = true }: { autoFocus?: boolean }) {
+export default function ChatWidget({ autoFocus = true, initialPrompt }: { autoFocus?: boolean; initialPrompt?: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -33,6 +33,16 @@ export default function ChatWidget({ autoFocus = true }: { autoFocus?: boolean }
     // pinned in place instead of the browser jumping the entire viewport.
     bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, loading]);
+
+  // a question typed in the hero's ask bar is sent as soon as the panel opens
+  const sentInitial = useRef(false);
+  useEffect(() => {
+    if (initialPrompt && !sentInitial.current) {
+      sentInitial.current = true;
+      void sendMessage(initialPrompt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function sendMessage(text: string) {
     if (!text.trim() || loading) return;

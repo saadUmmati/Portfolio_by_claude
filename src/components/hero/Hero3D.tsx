@@ -10,6 +10,8 @@ import { useMotion } from "@/components/motion/MotionProvider";
 import "@/lib/motion";
 import HeroPoster from "./HeroPoster";
 import { display } from "./fonts";
+import StretchText from "@/components/motion/StretchText";
+import AskBar from "@/components/AskBar";
 
 const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
 
@@ -25,6 +27,17 @@ function webglAvailable() {
   } catch {
     return false;
   }
+}
+
+function Clock() {
+  const [t, setT] = useState("");
+  useEffect(() => {
+    const f = () => setT(new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Karachi" }).format(new Date()));
+    f();
+    const id = window.setInterval(f, 30000);
+    return () => window.clearInterval(id);
+  }, []);
+  return <span suppressHydrationWarning>{t || "--:--"}</span>;
 }
 
 /* The hero. Everyone gets the instant SVG poster + the name. Desktop browsers that have WebGL
@@ -63,7 +76,7 @@ export default function Hero3D() {
       if (!capable || !root.current) return;
       ScrollTrigger.create({
         trigger: root.current,
-        start: "top top",
+        start: "top 72px",
         end: "+=250%",
         pin: true,
         scrub: true,
@@ -82,7 +95,7 @@ export default function Hero3D() {
     <section
       ref={root}
       aria-label="Introduction"
-      className={`${display.className} relative h-svh min-h-[560px] w-full overflow-hidden bg-black text-paper`}
+      className={`${display.className} relative h-[calc(100svh-72px)] min-h-[600px] w-full overflow-hidden bg-black text-paper`}
     >
       <HeroPoster className="absolute inset-0 h-full w-full" />
 
@@ -99,17 +112,27 @@ export default function Hero3D() {
 
       <div className="pointer-events-none absolute inset-4 border border-paper" />
 
-      <div ref={text} className="absolute inset-x-8 top-[11vh] md:inset-x-12">
-        <p className="mb-7 flex items-center gap-2.5 font-mono text-xs tracking-[0.08em] uppercase">
+      <div ref={text} className="absolute inset-x-6 top-[6vh] md:inset-x-12">
+        <p className="mb-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs tracking-[0.08em] uppercase">
           <span className="inline-block h-2.5 w-2.5 bg-accent" />
           {site.availability}
+          <span aria-hidden="true">/</span>
+          {site.location}
+          <span aria-hidden="true">/</span>
+          <span><Clock /> PKT</span>
         </p>
-        <h1 className="text-[clamp(1.7rem,4.2vw,4.3rem)] leading-[1.02] font-medium tracking-[-0.01em] uppercase">
-          {site.name}
+        <h1 aria-label={site.name}>
+          <span className="block font-mono text-sm tracking-[0.08em] uppercase" aria-hidden="true">Muhammad</span>
+          <StretchText
+            text="Saad Ahmed"
+            label="Saad Ahmed"
+            className="mt-2 text-[clamp(3rem,10.6vw,10.5rem)] leading-[0.88] font-black uppercase"
+          />
         </h1>
-        <p className="mt-6 font-mono text-xs tracking-[0.08em] uppercase md:text-[13px]">
-          {site.rolesRotating.join(" / ")}
-        </p>
+        <p className="mt-5 text-lg font-medium md:text-[22px]">AI Engineer &mdash; on-device AI, LLM agents &amp; automation</p>
+        <div className="mt-7 md:mt-9">
+          <AskBar />
+        </div>
       </div>
 
       <p className="absolute bottom-4 left-4 border border-paper bg-black px-4 py-2.5 font-mono text-xs tracking-[0.08em] uppercase">

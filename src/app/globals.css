@@ -180,3 +180,24 @@ html[data-motion="reduced"] .marquee-track {
 html[data-motion="reduced"] .marquee-track [data-dup] {
   display: none;
 }
+
+/* ---------- "Rich" skin: frosted glass + fine film grain (no gradients) ---------- */
+.glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Letters of <StretchText>: width axis is driven by the pointer */
+.stretch-l {
+  display: inline-block;
+  font-variation-settings: "wdth" var(--w, 70);
+}

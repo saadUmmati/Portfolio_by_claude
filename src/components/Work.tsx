@@ -1,125 +1,99 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { projects } from "@/data/projects";
 import SectionHeader from "@/components/kit/SectionHeader";
-import { display } from "@/components/hero/fonts";
 import { useDesktopMotion } from "@/lib/useDesktopMotion";
 import "@/lib/motion";
 
-/* Selected work as a horizontal strip.
-   Desktop: the section pins and scrolling moves the strip sideways.
-   Phones / reduced motion: the same strip is a normal swipeable row (no pinning, no hijacking). */
+/* Selected work as a big-type list. On desktop, hovering a row turns it violet and a preview of the
+   project follows the cursor. On phones every row shows its image inline. Each row opens its own page. */
 export default function Work() {
   const desktop = useDesktopMotion();
   const root = useRef<HTMLElement>(null);
-  const track = useRef<HTMLDivElement>(null);
-  const count = useRef<HTMLSpanElement>(null);
+  const card = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
 
+  const move = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
   useGSAP(
     () => {
-      if (!desktop || !root.current || !track.current) return;
-      const el = track.current;
-      const distance = () => Math.max(0, el.scrollWidth - window.innerWidth + 64);
-      gsap.to(el, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: true,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (count.current)
-              count.current.textContent = String(Math.min(projects.length, Math.floor(self.progress * projects.length) + 1)).padStart(2, "0");
-          },
-        },
-      });
+      if (!desktop || !card.current) return;
+      gsap.set(card.current, { xPercent: 0, yPercent: -50, autoAlpha: 0 });
+      move.current = {
+        x: gsap.quickTo(card.current, "x", { duration: 0.45, ease: "power3" }),
+        y: gsap.quickTo(card.current, "y", { duration: 0.45, ease: "power3" }),
+      };
     },
-    { scope: root, dependencies: [desktop], revertOnUpdate: true }
+    { scope: root, dependencies: [desktop] }
   );
 
+  const show = (i: number) => {
+    setActive(i);
+    if (card.current) gsap.to(card.current, { autoAlpha: 1, duration: 0.2 });
+  };
+  const hide = () => card.current && gsap.to(card.current, { autoAlpha: 0, duration: 0.2 });
+  const follow = (e: React.MouseEvent) => {
+    move.current?.x(e.clientX + 32);
+    move.current?.y(e.clientY);
+  };
+
+  const preview = projects[active];
+
   return (
-    <section ref={root} id="work" className="flex min-h-screen scroll-mt-24 flex-col justify-center overflow-hidden border-t border-ink py-16 md:py-20">
-      <div className="container-page flex items-end justify-between gap-8">
+    <section ref={root} id="work" className="scroll-mt-20 border-t border-ink pt-20 md:pt-28">
+      <div className="container-page flex items-end justify-between gap-8 pb-10 md:pb-14">
         <SectionHeader index="01" label="Selected work" title="Things I’ve built" />
-        <p className="font-mono text-label hidden shrink-0 uppercase md:block">
-          <span ref={count}>01</span> / {String(projects.length).padStart(2, "0")}
-        </p>
+        <Link href="/projects" className="cursor-hover hidden shrink-0 font-mono text-label uppercase underline underline-offset-4 md:block">
+          All {projects.length} projects &#8594;
+        </Link>
       </div>
 
-      <div
-        ref={track}
-        data-testid="work-track"
-        data-lenis-prevent={desktop ? undefined : ""}
-        className={`mt-12 flex gap-6 px-[max(1rem,calc((100vw-80rem)/2+1rem))] ${
-          desktop ? "w-max" : "snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none]"
-        }`}
-      >
+      <ul>
         {projects.map((p, i) => (
-          <article key={p.slug} className="group w-[min(82vw,720px)] shrink-0 snap-start border border-ink bg-bg">
+          <li key={p.slug} className="border-t border-ink last:border-b">
             <Link
               href={`/projects/${p.slug}`}
-              aria-label={`${p.title}: view case study`}
-              className="cursor-hover relative block aspect-[16/10] overflow-hidden border-b border-ink bg-accent"
+              onMouseEnter={desktop ? () => show(i) : undefined}
+              onMouseMove={desktop ? follow : undefined}
+              onMouseLeave={desktop ? hide : undefined}
+              className="cursor-hover group block px-5 py-7 transition-colors duration-200 hover:bg-accent hover:text-on-accent md:px-8 md:py-9 lg:px-12"
             >
-              {p.image ? (
-                <Image
-                  src={p.image}
-                  alt={`Screenshot of ${p.title}, a ${p.category.toLowerCase()} project`}
-                  fill
-                  sizes="(min-width: 768px) 720px, 82vw"
-                  className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0"
-                />
-              ) : (
-                <span className={`${display.className} text-h2 flex h-full items-center justify-center font-medium text-on-accent uppercase`}>
+              <span className="grid items-center gap-x-6 md:grid-cols-[4rem_1fr_18rem_3rem]">
+                <span className="hidden font-mono text-label uppercase md:block">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[clamp(1.7rem,3.8vw,3.2rem)] leading-[1.05] font-bold" style={{ fontVariationSettings: "'wdth' 108" }}>
                   {p.title}
+                </span>
+                <span className="mt-3 block font-mono text-label uppercase md:mt-0">
+                  {p.category}
+                  <br />
+                  {p.tags.slice(0, 4).join(" / ")}
+                </span>
+                <span className="hidden text-3xl md:block md:text-right">&#8594;</span>
+              </span>
+
+              {!desktop && p.image && (
+                <span className="relative mt-5 block aspect-[16/10] w-full overflow-hidden border border-ink">
+                  <Image src={p.image} alt={`Screenshot of ${p.title}`} fill sizes="100vw" className="object-cover" />
                 </span>
               )}
             </Link>
-
-            <div className="p-6 md:p-8">
-              <p className="flex items-center justify-between font-mono text-label uppercase">
-                <span>{String(i + 1).padStart(2, "0")} / {p.category}</span>
-                <span className="inline-block h-2.5 w-2.5 bg-accent" />
-              </p>
-              <h3 className={`${display.className} text-h2 mt-5 font-medium uppercase`}>
-                <Link href={`/projects/${p.slug}`} className="cursor-hover hover:text-accent-text">
-                  {p.title}
-                </Link>
-              </h3>
-              <p className="mt-4 line-clamp-3 max-w-xl text-[15px] leading-relaxed">{p.description}</p>
-
-              <ul className="mt-6 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <li key={t} className="border border-ink px-2.5 py-1 font-mono text-[11px] uppercase">{t}</li>
-                ))}
-              </ul>
-
-              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-label uppercase">
-                <Link href={`/projects/${p.slug}`} className="cursor-hover underline underline-offset-4">Case study</Link>
-                <a href={p.href} target="_blank" rel="noreferrer" className="cursor-hover underline underline-offset-4">Source &#8599;</a>
-                {p.liveUrl && (
-                  <a href={p.liveUrl} target="_blank" rel="noreferrer" className="cursor-hover underline underline-offset-4">Live demo &#8599;</a>
-                )}
-              </div>
-            </div>
-          </article>
+          </li>
         ))}
+      </ul>
 
-        <Link
-          href="/projects"
-          className={`${display.className} cursor-hover text-h2 flex w-[min(60vw,360px)] shrink-0 snap-start items-center justify-center bg-accent p-8 text-center font-medium text-on-accent uppercase`}
-        >
-          All projects &#8594;
-        </Link>
-      </div>
+      {desktop && (
+        <div ref={card} aria-hidden="true" className="pointer-events-none fixed top-0 left-0 z-[80] h-[238px] w-[380px] overflow-hidden border border-ink bg-bg">
+          {preview.image ? (
+            <Image key={preview.slug} src={preview.image} alt="" fill sizes="380px" className="object-cover" />
+          ) : (
+            <span className="flex h-full items-center justify-center bg-accent p-6 text-center text-2xl font-bold text-on-accent">{preview.title}</span>
+          )}
+        </div>
+      )}
     </section>
   );
 }

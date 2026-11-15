@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { site } from "@/data/site";
-import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 
 
-const body = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-face-body", display: "swap" });
+const body = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-face-body", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-face-mono", display: "swap" });
 
 export const metadata: Metadata = {

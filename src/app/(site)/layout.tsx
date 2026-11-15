@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import CursorPositionHUD from "@/components/CursorPositionHUD";
 import MotionProvider from "@/components/motion/MotionProvider";
 import ScrollProgress from "@/components/motion/ScrollProgress";
+import FloatingCta from "@/components/FloatingCta";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,6 +17,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main className="flex-1">{children}</main>
       <Footer />
       <ChatFab />
+      <FloatingCta />
     </MotionProvider>
   );
 }

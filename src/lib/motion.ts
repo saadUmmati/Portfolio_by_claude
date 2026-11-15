@@ -3,11 +3,13 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { Draggable } from "gsap/Draggable";
+import { InertiaPlugin } from "gsap/InertiaPlugin";
 
 let registered = false;
 export function registerGsap() {
   if (registered || typeof window === "undefined") return;
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger, SplitText, Draggable, InertiaPlugin);
   registered = true;
 }
 registerGsap(); // importing this file on the client registers the plugins

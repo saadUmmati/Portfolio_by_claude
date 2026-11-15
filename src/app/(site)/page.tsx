@@ -5,7 +5,8 @@ import ProofNetwork from "@/components/ProofNetwork";
 import RecentBlogPosts from "@/components/RecentBlogPosts";
 import TechMarquee from "@/components/TechMarquee";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
-import TestimonialsMarquee from "@/components/TestimonialsMarquee";
+import Testimonials from "@/components/Testimonials";
+import ClosingCta from "@/components/ClosingCta";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import { getResumeUrl } from "@/sanity/resume";
@@ -21,8 +22,9 @@ export default async function Home() {
       <RecentBlogPosts />
       <TechMarquee />
       <ExperienceTimeline />
-      <TestimonialsMarquee />
+      <Testimonials />
       <Faq />
+      <ClosingCta />
       <Contact resumeUrl={resumeUrl} />
     </>
   );

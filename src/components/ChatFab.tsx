@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { MessageCircle, Sparkles, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { site } from "@/data/site";
 import ChatPanel from "@/components/ChatPanel";
+import { OPEN_CHAT_EVENT } from "@/components/AskBar";
 
 // matchMedia doesn't fire change events for this particular check in practice (a
 // device's hover/pointer capability doesn't change mid-session), so subscribe is a
@@ -24,6 +25,17 @@ export default function ChatFab() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [prompt, setPrompt] = useState<string | undefined>();
+
+  // Anything on the page (hero ask bar, chips) can open the chat with a question
+  useEffect(() => {
+    const h = (e: Event) => {
+      setPrompt((e as CustomEvent<{ prompt?: string }>).detail?.prompt);
+      setChatOpen(true);
+    };
+    window.addEventListener(OPEN_CHAT_EVENT, h);
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, h);
+  }, []);
   // Only real mouse-driven devices get hover-to-open -- touch devices rely on
   // tap-to-toggle only. Mixing both on a touchscreen is what caused the
   // "hover doesn't work properly" issue: mobile browsers synthesize a hover-like
@@ -89,7 +101,7 @@ export default function ChatFab() {
         </button>
       </div>
 
-      <ChatPanel open={chatOpen} onClose={() => setChatOpen(false)} />
+      <ChatPanel open={chatOpen} onClose={() => { setChatOpen(false); setPrompt(undefined); }} initialPrompt={prompt} />
     </>
   );
 }

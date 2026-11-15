@@ -10,7 +10,7 @@ test.describe("desktop + WebGL", () => {
 
   test("name + poster render instantly, 3D canvas mounts, hero pins on scroll", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Muhammad Saad Ahmed");
+    await expect(page.getByRole("heading", { level: 1, name: "Muhammad Saad Ahmed" })).toBeVisible();
     await expect(page.getByRole("img", { name: /terrain of layered ridgelines/i })).toBeVisible();
     await expect(page.locator("section[aria-label='Introduction'] canvas")).toBeVisible({ timeout: 15000 });
     await page.mouse.move(700, 500);
@@ -56,7 +56,7 @@ test.describe("reduced motion", () => {
   test("poster only: no canvas, no pin", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
     await page.waitForTimeout(1000);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Muhammad Saad Ahmed");
+    await expect(page.getByRole("heading", { level: 1, name: "Muhammad Saad Ahmed" })).toBeVisible();
     expect(await page.locator("section[aria-label='Introduction'] canvas").count()).toBe(0);
     expect(await page.locator(".pin-spacer").count()).toBe(0);
   });
@@ -67,7 +67,7 @@ test.describe("phone", () => {
   test("poster only on touch devices", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
     await page.waitForTimeout(1000);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Muhammad Saad Ahmed");
+    await expect(page.getByRole("heading", { level: 1, name: "Muhammad Saad Ahmed" })).toBeVisible();
     expect(await page.locator("section[aria-label='Introduction'] canvas").count()).toBe(0);
   });
 });

@@ -12,14 +12,16 @@ test.describe("desktop", () => {
     expect(body.length).toBeLessThan(1_000_000); // was ~1.96 MB
   });
 
-  test("work gallery pins and slides sideways with scroll", async ({ page }) => {
+  test("work list: hovering a row shows a preview that follows the cursor", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
-    await page.locator("#work").scrollIntoViewIfNeeded();
-    for (let i = 0; i < 12; i++) { await page.mouse.wheel(0, 500); await page.waitForTimeout(120); }
-    await page.waitForTimeout(600);
-    const x = await page.getByTestId("work-track").evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m41);
-    console.log(`work track translateX: ${Math.round(x)}px`);
-    expect(x).toBeLessThan(-100);
+    const row = page.locator("#work ul a").first();
+    await row.scrollIntoViewIfNeeded();
+    await row.hover();
+    await page.mouse.move(600, 400);
+    await page.waitForTimeout(500);
+    const card = page.locator("#work div[aria-hidden='true']").first();
+    expect(Number(await card.evaluate((el) => getComputedStyle(el).opacity))).toBeGreaterThan(0.9);
+    await expect(row).toHaveAttribute("href", /\/projects\//);
   });
 
   test("stats count up and show their final values", async ({ page }) => {
@@ -59,11 +61,10 @@ test.describe("desktop", () => {
 test.describe("phone", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-  test("work is a swipeable row, nothing pins, page never scrolls sideways", async ({ page }) => {
+  test("work rows show their image inline and the page never scrolls sideways", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
     await page.waitForTimeout(800);
-    const track = page.getByTestId("work-track");
-    expect(await track.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
+    expect(await page.locator("#work ul a img").count()).toBeGreaterThan(0);
     expect(await page.locator(".pin-spacer").count()).toBe(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
   });
@@ -72,7 +73,7 @@ test.describe("phone", () => {
 test.describe("reduced motion", () => {
   test.use({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
 
-  test("marquee is a static grid and the work row is not pinned", async ({ page }) => {
+  test("marquee is a static grid and nothing is pinned", async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
     await page.waitForTimeout(800);
     expect(await page.locator("[data-track] [data-dup]").first().isVisible()).toBe(false);

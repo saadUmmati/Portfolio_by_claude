@@ -13,6 +13,7 @@
   --accent: #8b5cf6;       /* fills, borders, icons, LARGE text only on light */
   --accent-text: #000000;  /* small accent text: violet on #e2e8f0 is only 3.43:1 */
   --on-accent: #000000;    /* label colour on violet fills (4.96:1 in both themes) */
+  --glass: rgb(226 232 240 / 0.62); /* frosted bars (navbar, pill, ask bar) */
 }
 
 /* ---- Dark theme ---- */
@@ -22,6 +23,7 @@
   --accent: #8b5cf6;
   --accent-text: #8b5cf6;  /* violet on black is 4.96:1 -> fine for body text */
   --on-accent: #000000;
+  --glass: rgb(0 0 0 / 0.55);
 }
 
 /* ---- LEGACY ALIASES: keep the old components compiling during the rebuild.

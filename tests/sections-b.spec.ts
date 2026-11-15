@@ -33,12 +33,18 @@ test("proof network: hovering a point shows a solid tooltip", async ({ page }) =
   await expect(page.getByText("Manual work eliminated on a client's ops pipeline").first()).toBeVisible();
 });
 
-test("blog + testimonials sections render and the testimonial row moves", async ({ page }) => {
+test("blog cards render and the testimonial row can be dragged", async ({ page }) => {
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
   expect(await page.locator("a[href^='/blog/']").count()).toBeGreaterThanOrEqual(3);
-  const track = page.locator("[data-track]").last();
-  await track.evaluate((el) => el.scrollIntoView({ block: "center" }));
-  const a = await track.evaluate((el) => getComputedStyle(el).transform);
-  await page.waitForTimeout(800);
-  expect(await track.evaluate((el) => getComputedStyle(el).transform)).not.toBe(a);
+  const wrap = page.locator("#testimonials .cursor-grab");
+  await wrap.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const box = (await wrap.boundingBox())!;
+  const x = () => page.locator("#testimonials .select-none").evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m41);
+  const before = await x();
+  await page.mouse.move(box.x + box.width * 0.7, box.y + 150);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.2, box.y + 150, { steps: 14 });
+  await page.mouse.up();
+  await page.waitForTimeout(600);
+  expect(await x()).toBeLessThan(before - 50);
 });
