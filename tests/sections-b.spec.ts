@@ -3,6 +3,11 @@ import { test, expect } from "@playwright/test";
 // Run against a production build:  npm run build && npm run start   then   npx playwright test tests/sections-b.spec.ts
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
 
+test.beforeEach(async ({ page }) => {
+  // the opening loader is tested on its own (tests/phase7.spec.ts); everywhere else it is skipped
+  await page.addInitScript(() => sessionStorage.setItem("loaded", "1"));
+});
+
 test.use({ viewport: { width: 1440, height: 900 } });
 
 test("experience: the violet rail draws as you scroll, and filters work", async ({ page }) => {

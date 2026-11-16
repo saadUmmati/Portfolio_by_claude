@@ -39,7 +39,7 @@ export default function ExperienceTimeline() {
     <section id="experience" className="scroll-mt-28 border-t border-ink py-20 md:py-32">
       <div className="container-page">
         <SectionHeader
-          index="04"
+          index="07"
           label="Experience"
           title="Where I’ve worked"
           intro="My professional journey and the roles I’ve held throughout my career."
@@ -118,7 +118,7 @@ export default function ExperienceTimeline() {
                       {item.gallery.map((g) =>
                         g.src ? (
                           <div key={g.label} className="group relative h-24 w-40 shrink-0 overflow-hidden border border-ink">
-                            <Image
+                            <Image quality={90}
                               src={g.src}
                               alt={g.label}
                               fill

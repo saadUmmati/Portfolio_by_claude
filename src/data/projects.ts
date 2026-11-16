@@ -31,7 +31,7 @@ export const projects: Project[] = [
       "ClipGallery runs semantic photo clustering entirely on-device using a quantized DINOv2 model exported to ONNX INT8, so photos are grouped by visual similarity without any of the image data ever leaving the phone. Clusters get human-readable names via CLIP-based zero-shot classification against a label set, and the app includes a 30-day recycle bin so deletions are never immediately destructive.",
     tags: ["Kotlin", "ONNX", "DINOv2", "CLIP"],
     href: "https://github.com/saadUmmati/clip_gallery",
-    image: "/images/projects/clipgallery-hero.jpg",
+    image: "/images/projects/clipgallery-hero.png",
     codeSnippet: {
       language: "kotlin",
       code: `// On-device embedding extraction via ONNX Runtime, used for clustering.
@@ -52,7 +52,7 @@ fun extractEmbedding(bitmap: Bitmap): FloatArray {
       "E-Wardrobe is a web-based Virtual Try-On (VTON) system for fashion e-commerce platforms, particularly Shopify. Instead of AR glasses or a live camera feed, it overlays a selected garment onto a pre-uploaded user photo using CatVTON, a diffusion-based model that spatially concatenates the garment and person images rather than relying on pose parsing or text conditioning. The stack is MERN (MongoDB, Express, React, Node) end to end, with the CatVTON pipeline exposed as its own service the backend calls.\n\nThe diffusion U-Net + VAE backbone runs at roughly 899M total parameters but only about 49.6M of those (the self-attention layers) were actually fine-tuned for the try-on task -- everything else stays frozen. That keeps training cost down and inference simple: no pose estimation, no parsing step, no text encoder, just the concatenated image inputs, running on 1024x768 images in under about 8GB of VRAM.",
     tags: ["MERN", "Computer Vision", "Diffusion Models"],
     href: "https://github.com/saadUmmati/E-wardrobe-fyp",
-    image: "/images/projects/ewardrobe-hero.jpg",
+    image: "/images/projects/virtual-tryon-hero.png",
     roleHighlights: [
       {
         title: "AI Model Integration",
@@ -98,7 +98,7 @@ def generate_tryon(person_img: Image, garment_img: Image) -> Image:
       "Trained a YOLOv8 object detection model on a custom-labeled dataset to identify workers wearing (or not wearing) safety helmets in real time. Built for workplace safety monitoring — the model runs on video feed frames and flags non-compliant frames for review, sized to run at real-time speed on standard hardware rather than requiring a GPU cluster.",
     tags: ["YOLOv8", "Python", "Computer Vision"],
     href: "https://github.com/saadUmmati/Helmet-Detection-in-CV",
-    image: "/images/projects/helmet-detection-hero.jpg",
+    image: "/images/projects/helmet-detection-hero.png",
     codeSnippet: {
       language: "python",
       code: `model = YOLO("helmet_detection_best.pt")
@@ -121,7 +121,7 @@ def detect_helmets(frame):
       "Researched and architected a hybrid measurement approach combining ARCore's plane-tracking and hit-testing with a quantized Depth Anything V2 model (exported to ONNX) for monocular depth estimation where ARCore's own depth data isn't available or reliable enough. The goal: an Android equivalent to iPhone's Measure app, usable on devices without a dedicated depth sensor.",
     tags: ["ARCore", "Depth Anything V2", "Android"],
     href: "https://github.com/saadummati",
-    image: "/images/projects/ar-measurement-hero.jpg",
+    image: "/images/projects/ar-measurement-hero.png",
     codeSnippet: {
       language: "kotlin",
       code: `// Hit-test a tapped point against detected AR planes to anchor it.
@@ -143,9 +143,9 @@ fun placeAnchorAt(x: Float, y: Float, frame: Frame): Anchor? {
       "A full-featured Android music player built in Kotlin with a traditional XML view system. Playback runs through a foreground Service tied to a MediaSession, so controls stay available from the lock screen and notification shade with a live seekbar. Album art loads asynchronously via Glide, with graceful fallbacks for tracks missing embedded artwork.",
     tags: ["Kotlin", "XML", "MediaSession"],
     href: "https://github.com/saadUmmati/TaskeenMusicPlayer",
-    image: "/images/projects/melodix-hero.jpg",
+    image: "/images/projects/melodix-hero.png",
     gallery: [
-      { label: "Now playing screen", src: "/images/projects/melodix-hero.jpg" },
+      { label: "Now playing screen", src: "/images/projects/melodix-hero.png" },
       { label: "Player controls & seekbar", src: "/images/gallery/melodix-player-screen.jpg" },
     ],
     codeSnippet: {

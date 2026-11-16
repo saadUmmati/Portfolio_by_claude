@@ -88,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${body.variable} ${mono.variable} h-full scroll-smooth antialiased suppressHydrationWarning`}>
+<html lang="en" className={`${body.variable} ${mono.variable} h-full scroll-smooth antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script

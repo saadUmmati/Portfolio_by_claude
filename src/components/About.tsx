@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/data/site";
-import SectionHeader from "@/components/kit/SectionHeader";
+import AboutIntro from "@/components/AboutIntro";
 import ScrubText from "@/components/kit/ScrubText";
 import Reveal from "@/components/Reveal";
 
@@ -13,7 +13,12 @@ export default function About() {
   return (
     <section id="about" className="scroll-mt-24 border-t border-ink py-20 md:py-32">
       <div className="container-page">
-        <SectionHeader index="02" label="About" title="The person behind the systems" />
+        <p className="mb-8 flex items-center gap-3 font-mono text-label uppercase">
+          <span>02</span>
+          <span className="h-px w-10 bg-ink" />
+          <span>About</span>
+        </p>
+        <AboutIntro />
 
         <div className="mt-14 grid gap-14 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-4">
@@ -26,7 +31,7 @@ export default function About() {
                     alt={`${site.name}, ${site.title}`}
                     fill
                     sizes="(min-width: 768px) 360px, 90vw"
-                    quality={85}
+                    quality={95}
                     className={`object-cover ${PORTRAIT === "mono" ? "grayscale" : ""}`}
                     style={PORTRAIT === "tritone" ? { filter: "url(#tritone)" } : undefined}
                   />

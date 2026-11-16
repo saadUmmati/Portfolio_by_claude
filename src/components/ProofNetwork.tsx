@@ -97,7 +97,7 @@ export default function ProofNetwork() {
     <section className="border-t border-ink py-20 md:py-32">
       <div className="container-page">
         <SectionHeader
-          index="03"
+          index="04"
           label="Proof"
           title="Proof, not promises."
           intro="Hover a point — every number here is a real, delivered result, not a projection."

@@ -3,6 +3,11 @@ import { test, expect } from "@playwright/test";
 // The automated gradient gate: scans the COMPUTED styles of every element on every page, in both themes.
 // Run against a production build:  npm run build && npm run start   then   npx playwright test tests/styles.spec.ts
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+
+test.beforeEach(async ({ page }) => {
+  // the opening loader is tested on its own (tests/phase7.spec.ts); everywhere else it is skipped
+  await page.addInitScript(() => sessionStorage.setItem("loaded", "1"));
+});
 const ROUTES = ["/", "/projects", "/services", "/blog", "/testimonials", "/schedule", "/chat", "/links"];
 
 test.use({ viewport: { width: 1440, height: 900 } });

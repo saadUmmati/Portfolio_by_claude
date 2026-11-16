@@ -3,6 +3,11 @@ import { PNG } from "pngjs";
 
 // Run against a production build:  npm run build && npm run start   then   npx playwright test tests/hero.spec.ts
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+
+test.beforeEach(async ({ page }) => {
+  // the opening loader is tested on its own (tests/phase7.spec.ts); everywhere else it is skipped
+  await page.addInitScript(() => sessionStorage.setItem("loaded", "1"));
+});
 const PALETTE = [[0, 0, 0], [226, 232, 240], [139, 92, 246]];
 
 test.describe("desktop + WebGL", () => {

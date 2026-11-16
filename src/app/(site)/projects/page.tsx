@@ -31,7 +31,7 @@ export default function ProjectsPage() {
             >
               <div className="relative h-44 w-full overflow-hidden bg-surface-2">
                 {p.image ? (
-                  <Image
+                  <Image quality={90}
                     src={p.image}
                     alt={`Screenshot of ${p.title}, a ${p.category.toLowerCase()} project`}
                     fill

@@ -77,7 +77,7 @@ export default function Work() {
 
               {!desktop && p.image && (
                 <span className="relative mt-5 block aspect-[16/10] w-full overflow-hidden border border-ink">
-                  <Image src={p.image} alt={`Screenshot of ${p.title}`} fill sizes="100vw" className="object-cover" />
+                  <Image quality={90} src={p.image} alt={`Screenshot of ${p.title}`} fill sizes="100vw" className="object-cover" />
                 </span>
               )}
             </Link>
@@ -88,7 +88,7 @@ export default function Work() {
       {desktop && (
         <div ref={card} aria-hidden="true" className="pointer-events-none fixed top-0 left-0 z-[80] h-[238px] w-[380px] overflow-hidden border border-ink bg-bg">
           {preview.image ? (
-            <Image key={preview.slug} src={preview.image} alt="" fill sizes="380px" className="object-cover" />
+            <Image quality={90} key={preview.slug} src={preview.image} alt="" fill sizes="380px" className="object-cover" />
           ) : (
             <span className="flex h-full items-center justify-center bg-accent p-6 text-center text-2xl font-bold text-on-accent">{preview.title}</span>
           )}

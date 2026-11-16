@@ -46,7 +46,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
 
       <div className="mt-6 relative h-56 w-full overflow-hidden rounded-2xl bg-surface-2 md:h-80">
         {project.image ? (
-          <Image
+          <Image quality={90}
             src={project.image}
             alt={`Screenshot of ${project.title}, a ${project.category.toLowerCase()} project`}
             fill
@@ -104,7 +104,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
           {project.gallery.map((g) => (
             <div key={g.label} className="overflow-hidden rounded-2xl border border-border bg-surface-2">
               <div className="relative h-48 w-full">
-                <Image src={g.src} alt={g.label} fill sizes="400px" className="object-cover" />
+                <Image quality={90} src={g.src} alt={g.label} fill sizes="400px" className="object-cover" />
               </div>
               <p className="p-3 text-xs text-muted">{g.label}</p>
             </div>

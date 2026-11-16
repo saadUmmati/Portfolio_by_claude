@@ -12,6 +12,7 @@ import HeroPoster from "./HeroPoster";
 import { display } from "./fonts";
 import StretchText from "@/components/motion/StretchText";
 import AskBar from "@/components/AskBar";
+import { HERO_READY_EVENT } from "@/components/Loader";
 
 const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
 
@@ -60,7 +61,9 @@ export default function Hero3D() {
     const q = new URLSearchParams(window.location.search).get("hero");
     setDebug(q === "debug");
     const desktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
-    setCapable(!reduced && desktop && q !== "poster" && webglAvailable());
+    const can = !reduced && desktop && q !== "poster" && webglAvailable();
+    setCapable(can);
+    if (!can) window.dispatchEvent(new Event(HERO_READY_EVENT)); // poster only: nothing to wait for
   }, [reduced]);
 
   useEffect(() => {
@@ -104,7 +107,7 @@ export default function Hero3D() {
           <HeroScene
             progress={progress}
             active={inView}
-            onReady={() => setReady(true)}
+            onReady={() => { setReady(true); window.dispatchEvent(new Event(HERO_READY_EVENT)); }}
             onFps={debug ? (n) => { if (fpsEl.current) fpsEl.current.textContent = `${n} fps`; } : undefined}
           />
         </div>

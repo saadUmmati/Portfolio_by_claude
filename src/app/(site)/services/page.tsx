@@ -50,7 +50,7 @@ export default function ServicesPage() {
             >
               {s.gallery[0]?.src ? (
                 <div className="relative h-32 overflow-hidden rounded-xl bg-surface-2">
-                  <Image
+                  <Image quality={90}
                     src={s.gallery[0].src}
                     alt={s.gallery[0].label}
                     fill

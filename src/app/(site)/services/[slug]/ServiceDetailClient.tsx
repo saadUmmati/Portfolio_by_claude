@@ -44,7 +44,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             <div>
               <div className="relative h-64 overflow-hidden rounded-2xl border border-border md:h-80">
                 {service.gallery[slide]?.src ? (
-                  <Image
+                  <Image quality={90}
                     src={service.gallery[slide].src!}
                     alt={service.gallery[slide].label}
                     fill
@@ -94,7 +94,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                       }`}
                     >
                       {g.src ? (
-                        <Image src={g.src} alt={g.label} fill sizes="150px" className="object-cover" />
+                        <Image quality={90} src={g.src} alt={g.label} fill sizes="150px" className="object-cover" />
                       ) : (
                         <span className="flex h-full items-center justify-center px-1 text-center text-xs text-muted">
                           {g.label}

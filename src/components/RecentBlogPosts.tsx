@@ -12,7 +12,7 @@ export default function RecentBlogPosts() {
       <div className="container-page">
         <div className="flex items-end justify-between gap-8">
           <SectionHeader
-            index="06"
+            index="05"
             label="Journal"
             title="Recent writing"
             intro="Latest insights on AI, mobile, and software engineering."

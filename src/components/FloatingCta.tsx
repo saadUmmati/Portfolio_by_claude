@@ -34,7 +34,7 @@ export default function FloatingCta() {
       >
         Start a project
         <span className="relative h-9 w-9 overflow-hidden rounded-full">
-          <Image src="/images/profile-image.jpg" alt={site.name} fill sizes="36px" className="object-cover" />
+          <Image quality={90} src="/images/profile-image.jpg" alt={site.name} fill sizes="36px" className="object-cover" />
         </span>
       </Link>
     </div>

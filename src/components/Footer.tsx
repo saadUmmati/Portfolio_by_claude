@@ -39,7 +39,7 @@ export default function Footer() {
                   alt={site.name}
                   fill
                   sizes="88px"
-                  quality={85}
+                  quality={95}
                   className="object-cover"
                 />
               </div>

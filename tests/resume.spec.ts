@@ -3,6 +3,11 @@ import { test, expect } from "@playwright/test";
 // Run against a production build:  npm run build && npm run start   then   npx playwright test tests/resume.spec.ts
 const BASE = process.env.BASE_URL ?? "http://localhost:3000";
 
+test.beforeEach(async ({ page }) => {
+  // the opening loader is tested on its own (tests/phase7.spec.ts); everywhere else it is skipped
+  await page.addInitScript(() => sessionStorage.setItem("loaded", "1"));
+});
+
 test("resume page shows only the PDF, full screen, with no site navigation", async ({ page }) => {
   await page.goto(`${BASE}/resume`, { waitUntil: "domcontentloaded" });
   await expect(page.locator("iframe")).toHaveAttribute("src", /\.pdf/);
